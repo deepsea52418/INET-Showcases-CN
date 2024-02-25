@@ -18,8 +18,7 @@ Contents
 
 .. toctree::
 
-   usage
-   api
+   
    Time Synchronization
    Per-Stream Filtering and Policing
    Scheduling and Traffic Shaping
