@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'INET_Showcases_CN'
+copyright = '2024, Deepsae52418, PrunierLiang'
+author = 'Deepsae52418, PrunierLiang'
 
 release = '0.1'
 version = '0.1.0'
