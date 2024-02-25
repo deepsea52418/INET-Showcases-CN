@@ -1,5 +1,5 @@
 """
-Lumache - Python library for cooks and food lovers.
+INET-Showcases-CN - Python library for cooks and food lovers.
 """
 
 __version__ = "0.1.0"
@@ -16,7 +16,7 @@ def get_random_ingredients(kind=None):
 
     :param kind: Optional "kind" of ingredients.
     :type kind: list[str] or None
-    :raise lumache.InvalidKindError: If the kind is invalid.
+    :raise INET_Showcases_CN.InvalidKindError: If the kind is invalid.
     :return: The ingredients list.
     :rtype: list[str]
     """
