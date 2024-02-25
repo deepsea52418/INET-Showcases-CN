@@ -1,5 +1,6 @@
 Automatic Gate Schedule Configuration
 =====
+
 Eager Gate Schedule Configuration
 ------------
 
