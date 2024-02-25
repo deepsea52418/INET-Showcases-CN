@@ -3,7 +3,7 @@
 
 **INET-Showcases-CN** 项目主要完成INET Framework中TSN相关Showcases的中文翻译与讲解。
 
-该项目主页见 `打开INET-Showcases-CN <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/index.html#>`_
+该项目github主页见 `打开INET-Showcases-CN <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/index.html#>`_
 .
 
 
