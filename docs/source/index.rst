@@ -3,17 +3,15 @@
 
 **INET-Showcases-CN** 项目主要完成INET Framework中TSN相关Showcases的中文翻译与讲解。
 that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+It pulls data from the `Open Food Facts database <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/index.html#>`_
+.
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
 
 .. note::
 
-   This project is under active development.
+   该项目正在进行中.
 
-testtest
+
 
 Contents
 --------
