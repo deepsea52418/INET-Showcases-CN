@@ -1,8 +1,6 @@
 Time Synchronization
 =====
 
-
-
 Clock Drift
 ------------
 
