@@ -1,7 +1,7 @@
-Welcome to Lumache's documentation!
+欢迎来到INET-Showcases-CN!
 ===================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
+**INET-Showcases-CN**项目主要完成INET Framework中TSN相关Showcases的中文翻译与讲解。
 that creates recipes mixing random ingredients.
 It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
 and offers a *simple* and *intuitive* API.
@@ -22,3 +22,11 @@ Contents
 
    usage
    api
+   Time Synchronization
+   Per-Stream Filtering and Policing
+   Scheduling and Traffic Shaping
+   Automatic Gate Schedule Configuration
+   Frame Replication and Elimination for Reliability
+   Frame Preemption
+   Cut-Through Switching
+   Combining Features
