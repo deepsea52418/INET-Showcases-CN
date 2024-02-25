@@ -1,4 +1,4 @@
-Scheduling and Traffic Shaping
+Frame Replication and Elimination for Reliability
 =====
 Manual Stream Configuration
 ------------
