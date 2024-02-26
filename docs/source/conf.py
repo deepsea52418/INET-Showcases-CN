@@ -3,8 +3,8 @@
 # -- Project information
 
 project = 'INET_Showcases_CN'
-copyright = '2024, Deepsae52418, PrunierLiang'
-author = 'Deepsae52418, PrunierLiang'
+copyright = '2024, Deepsea52418'
+author = 'Deepsea52418, PrunierLiang'
 
 release = '0.1'
 version = '0.1.0'
