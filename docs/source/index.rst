@@ -17,8 +17,7 @@ Contents
 --------
 
 .. toctree::
-
-   
+   demo
    Time Synchronization
    Per-Stream Filtering and Policing
    Scheduling and Traffic Shaping
@@ -27,3 +26,4 @@ Contents
    Frame Preemption
    Cut-Through Switching
    Combining Features
+   
