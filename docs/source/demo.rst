@@ -1,4 +1,4 @@
-独立使用流量整形器
+独立使用流量整形器2
 ====================
 
 目标
@@ -12,14 +12,6 @@
 | 源文件位置： `inet/showcases/tsn/trafficshaping/underthehood <https://github.com/inet-framework/inet/tree/master/showcases/tsn/trafficshaping/underthehood>`__
 
 
+.. raw::html
+    <iframe src="//player.bilibili.com/player.html?aid=283448464&bvid=BV1Wc411t7TD&cid=1399372456&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-.. raw:: html
-
-   <iframe width="560" height="315" src="https://www.bilibili.com/video/BV1ik4y1u7w4/" frameborder="0" allowfullscreen></iframe>
-
-
-
-.. image:: https://inet.omnetpp.org/docs/_images/TsnSwitch3.png
-   :width: 400
-   :height: 300
-   :alt: Alternative Text
