@@ -19,10 +19,10 @@
    :glob:
 
    Time Synchronization/index
-   Per-Stream Filtering and Policing 流过滤/index
-   Scheduling and Traffic Shaping 调度与整形/index
-   Automatic Gate Schedule Configuration 自动门控配置/index
-   Frame Replication and Elimination for Reliability 帧复制与消除/index
-   Frame Preemption 帧抢占/index
-   Cut-Through Switching 直通交换/index
-   Combining Features 组合功能/index
+   Per-Stream Filtering and Policing/index
+   Scheduling and Traffic Shaping/index
+   Automatic Gate Schedule Configuration/index
+   Frame Replication and Elimination for Reliability/index
+   Frame Preemption/Frame Preemption
+   Cut-Through Switching/Cut-Through Switching
+   Combining Features/index
