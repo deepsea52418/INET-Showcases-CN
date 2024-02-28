@@ -5,11 +5,8 @@ Time Synchronization时间同步
 
 以下展示了与时间同步相关的主题内容
 
-目录
--------- 
+
 .. toctree::
-    :maxdepth: 1
-    :numbered: 2
 
     demo
     Clock Drift 时钟漂移
