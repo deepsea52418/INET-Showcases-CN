@@ -8,7 +8,9 @@ Time Synchronization时间同步
 目录
 -------- 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :numbered: 2
+
+    demo
     Clock Drift 时钟漂移
     Using gPTP 使用gPTP

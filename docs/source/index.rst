@@ -15,7 +15,7 @@
 目录
 -------- 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :glob:
 
    Time Synchronization 时间同步/index
