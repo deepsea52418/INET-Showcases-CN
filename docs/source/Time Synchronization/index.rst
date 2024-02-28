@@ -7,8 +7,6 @@ Time Synchronization 时间同步
 
 
 .. toctree::
-    :maxdepth: 1
-    :glob:
     
     demo
     Clock Drift
