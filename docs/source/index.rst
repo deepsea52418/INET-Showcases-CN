@@ -18,7 +18,7 @@
    :maxdepth: 1
    :glob:
 
-   Time Synchronization 时间同步/index
+   Time Synchronization/index
    Per-Stream Filtering and Policing 流过滤/index
    Scheduling and Traffic Shaping 调度与整形/index
    Automatic Gate Schedule Configuration 自动门控配置/index

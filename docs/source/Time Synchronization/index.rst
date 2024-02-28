@@ -9,5 +9,5 @@ Time Synchronization时间同步
 .. toctree::
 
     demo
-    Clock Drift 时钟漂移
-    Using gPTP 使用gPTP
+    Clock Drift
+    Using gPTP
