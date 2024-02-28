@@ -12,18 +12,17 @@
    该项目正在进行中.
 
 
-
-Contents
---------
-
+目录
+--------   
 .. toctree::
-   demo
-   Time Synchronization
-   Per-Stream Filtering and Policing
-   Scheduling and Traffic Shaping
-   Automatic Gate Schedule Configuration
-   Frame Replication and Elimination for Reliability
-   Frame Preemption
-   Cut-Through Switching
-   Combining Features
-   
+   :maxdepth: 2
+   :glob:
+
+   Time Synchronization 时间同步/index
+   Per-Stream Filtering and Policing 流过滤/index
+   Scheduling and Traffic Shaping 调度与整形/index
+   Automatic Gate Schedule Configuration 自动门控配置/index
+   Frame Replication and Elimination for Reliability 帧复制与消除/index
+   Frame Preemption 帧抢占/index
+   Cut-Through Switching 直通交换/index
+   Combining Features 组合功能/index
