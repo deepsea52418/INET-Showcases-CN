@@ -1,10 +1,11 @@
 Demo
 ================
 
+1号
 
 这是一个图片
 --------------
-.. image:: /Pic/OneMasterClock_tree.png
+.. image:: docs/source/Time Synchronization/Pic/OneMasterClock_tree.png
    :alt: 这是图片描述
    :align: center
 
