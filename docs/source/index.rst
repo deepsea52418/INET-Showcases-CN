@@ -47,7 +47,7 @@ INET Showcases CN
 
 .. note::
 
-   该项目正在进行中.
+   该项目正在进行中
 
 
 目录
