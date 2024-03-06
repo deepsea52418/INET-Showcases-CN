@@ -9,7 +9,7 @@ Goals
 
 INET version: ``4.5``
 
-Source files location:
+源地址链接:
 `inet/showcases/tsn/timesynchronization/gptp <https://github.com/inet-framework/inet/tree/master/showcases/tsn/timesynchronization/gptp>`__
 
 About gPTP
@@ -158,12 +158,8 @@ TsnDevice和TsnSwitch中的从端口默认设置为 ``eth0`` ，因此不需要�
 这是一个同步机制的视频（显示了主时钟的时间以及其他节点与此时间的差异）
 
 .. raw:: html
+<iframe src="https://inet.omnetpp.org/docs/showcases/tsn/timesynchronization/gptp/doc/media/onemasterclock.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-   <video src="C:\04_work\03_合作\00_pj_deepsea\onemasterclock.mp4">
-
-.. raw:: html
-
-   </video>
 
 请注意，在接收到后续消息之后设置时钟。
 
@@ -318,13 +314,11 @@ Here is the configuration for the switches: 这是交换机的配置
 以下是模拟开始时的时间同步过程的视频。显示了主节点的时钟时间以及其他节点与该时钟时间的时间差。
 gPTP的消息以箭头形式可视化。可视化根据域进行了颜色编码。
 
-.. raw:: html
 
-   <video src="C:\04_work\03_合作\00_pj_deepsea\PrimaryAndHotStandbyMasterClocks.mp4">
 
 .. raw:: html
 
-   </video>
+<iframe src="https://inet.omnetpp.org/docs/showcases/tsn/timesynchronization/gptp/doc/media/PrimaryAndHotStandbyMasterClocks.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 首先，桥接节点和从节点通过交换pDelay消息来测量链路延迟。然后，主时钟发送gPTP同步消息。请注意，在接收到gPTP跟随消息后，时钟设置为新时间时，时间差会发生跳变。
 
