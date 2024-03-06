@@ -75,8 +75,3 @@ jobs:
           git remote remove origin
           git remote add origin ${REPO_SSH}
           git commit -m 'Actions auto update' && git push -f origin ${SUBMMIT_BRANCH} || echo "No changes to commit"
-
-作者：SWHL
-链接：https://juejin.cn/post/7217295157706719290
-来源：稀土掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
