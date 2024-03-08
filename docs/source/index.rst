@@ -43,14 +43,12 @@ INET Showcases CN
   + 
 
 
-`项目Github主页 <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/index.html#>`_
-
 
 .. note::
  项目计划：
-   2024.03 完成时间同步部分
-   2024.04 完成流过滤与监管部分
-   待定
+|   2024.03 完成时间同步部分
+|   2024.04 完成流过滤与监管部分
+|   待定
 
 目录
 -------- 
