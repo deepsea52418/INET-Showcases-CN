@@ -8,9 +8,9 @@
 
 .. toctree::
 
-    Time-Aware Shaping
-    Credit-Based Shaping
-    Asynchronous Traffic Shaping
-    Using Different Traffic Shapers for Different Traffic Classes
-    Combining Time-Aware and Credit-Based Shaping
-    Using Traffic Shapers Independently
+    Time-Aware_Shaping
+    Credit-Based_Shaping
+    Asynchronous_Traffic_Shaping
+    Using_Different_Traffic_Shapers_for_Different_Traffic_Classes
+    Combining_Time-Aware_and_Credit-Based_Shaping
+    Using_Traffic_Shapers_Independently

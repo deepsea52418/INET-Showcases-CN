@@ -1,4 +1,4 @@
-Using gPTP 使用gPTP
+使用gPTP
 ===================
 
 Goals

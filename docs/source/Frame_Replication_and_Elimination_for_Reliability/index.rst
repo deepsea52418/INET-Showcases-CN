@@ -7,7 +7,7 @@
 
 .. toctree::
 
-    Manual Stream Configuration
-    Automatic Multipath Stream Configuration
-    Automatic Stream Configuration with Failure Protection
-    Multicast Streams with Failure Protection
+    Manual_Stream_Configuration
+    Automatic_Multipath_Stream_Configuration
+    Automatic_Stream_Configuration_with_Failure_Protection
+    Multicast_Streams_with_Failure_Protection

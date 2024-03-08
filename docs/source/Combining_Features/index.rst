@@ -8,6 +8,6 @@
 
 .. toctree::
 
-    Effects of Time Synchronization on Time-Aware Shaping
-    Frame Replication with Time-Aware Shaping
-    In-vehicle Network
+    Effects_of_Time_Synchronization_on_Time-Aware_Shaping
+    Frame_Replication_with_Time-Aware_Shaping
+    In-vehicle_Network

@@ -9,5 +9,5 @@
 .. toctree::
     
     demo
-    Clock Drift
-    Using gPTP
+    Clock_Drift
+    Using_gPTP

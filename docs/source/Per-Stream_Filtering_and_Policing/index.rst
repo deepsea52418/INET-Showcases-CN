@@ -8,6 +8,6 @@
 
 .. toctree::
 
-    Token Bucket based Policing
-    Statistical Policing
-    Peeking Under the Hood
+    Token_Bucket_based_Policing
+    Statistical_Policing
+    Peeking_Under_the_Hood
