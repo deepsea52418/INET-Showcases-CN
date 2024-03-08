@@ -20,7 +20,7 @@ INET Showcases CN
 
 贡献名单
 ------------
-项目负责人： `Deepsea52418 <https://github.com/deepsea52418>`_
+项目负责人： `Deepsea52418 <https://github.com/deepsea52418>`_ 
 
 网站搭建管理： `PrunierLiang <https://github.com/PrunierLiang>`_
 
@@ -47,7 +47,7 @@ INET Showcases CN
 
 .. note::
 
-   该项目正在进行中
+   
 
 
 目录
@@ -59,7 +59,7 @@ INET Showcases CN
    Time Synchronization/index
    Per-Stream Filtering and Policing/index
    Scheduling and Traffic Shaping/index
-   Automatic Gate Schedule Configuration/index
+   Automatic_Gate_Schedule_Configuration/index
    Frame Replication and Elimination for Reliability/index
    Frame Preemption/Frame Preemption
    Cut-Through Switching/Cut-Through Switching
