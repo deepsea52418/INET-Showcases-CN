@@ -2,7 +2,7 @@
 
 # -- Project information
 
-project = 'INET_Showcases_CN'
+project = 'INET Showcases CN'
 copyright = '2024, Deepsea52418'
 author = 'Deepsea52418, PrunierLiang'
 

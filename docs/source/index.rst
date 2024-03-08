@@ -15,7 +15,7 @@ INET Showcases CN
 + **网站搭建维护**  
   
   + `PrunierLiang <https://github.com/PrunierLiang>`_ 
-+ **时间同步**  
++ **时间同步** 
   
   + `dkmahao <https://github.com/dkmahao>`_ 
   + 2024.03.07 创建网页
@@ -51,21 +51,3 @@ INET Showcases CN
    2024.03 完成时间同步部分
    2024.04 完成流过滤与监管部分
    待定
-   
-   
-
-
-目录
--------- 
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   Time Synchronization/index
-   Per-Stream Filtering and Policing/index
-   Scheduling and Traffic Shaping/index
-   Automatic_Gate_Schedule_Configuration/index
-   Frame Replication and Elimination for Reliability/index
-   Frame Preemption/Frame Preemption
-   Cut-Through Switching/Cut-Through Switching
-   Combining Features/index
