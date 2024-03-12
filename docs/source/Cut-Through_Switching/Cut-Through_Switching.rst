@@ -40,7 +40,8 @@ INET框架中的直通式交换利用"节点内数据包流" 的机制，以便�
 
 以下视频显示了 Qtenv 中的存储-转发行为：
 
-
+.. raw:: html
+   <video controls src="Pic/storeandforward.mp4"></video>
 
 接下来的视频显示了 cut-through 行为：
 
@@ -52,6 +53,7 @@ INET框架中的直通式交换利用"节点内数据包流" 的机制，以便�
 .. image:: Pic/storeandforwardseq2.png
    :alt: 存储-转发交换
    :align: center
+
 
 直通交换
 
