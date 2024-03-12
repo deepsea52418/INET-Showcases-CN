@@ -32,42 +32,41 @@ INET框架中的直通式交换利用"节点内数据包流" 的机制，以便�
 以太网交换机的网口模块替换为 `EthernetCutthroughInterface <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.ethernet.modular.EthernetCutthroughInterface.html>`__ 。这个模块默认不启用直通式交换功能，\
 因此需要通过将 ``enableCutthrough``参数设置为``true``来启用它。
 
-此外，交换机中的所有必要组件都需要支持数据包流。交换机中的 cut-through 接口默认支持数据包流；主机中的默认 PHY 层需要替换为 :ned:`EthernetStreamingPhyLayer`，它支持数据包流。
+此外，在交换机中的所有模块必须都支持数据包流。交换机中的 EthernetCutthroughInterface 模块默认支持数据包流；需要将主机中的PHY层模块替换为 `EthernetStreamingPhyLayer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.physicallayer.wired.ethernet.EthernetStreamingPhyLayer.html>`__ \
+模块以支持数据包流。
 
 结果
 -----
 
 以下视频显示了 Qtenv 中的存储-转发行为：
 
-.. video:: media/storeandforward.mp4
-   :width: 90%
-   :align: center
+
 
 接下来的视频显示了 cut-through 行为：
 
-.. video:: media/cutthrough1.mp4
-   :width: 90%
+
+
+以下序列图摘录显示了从 ``device1`` 发送到 ``device2`` 的包经过交换机的情况，分别为存储-转发交换和直通交换（时间轴是线性的）：
+
+.. image:: Pic/storeandforwardseq2.png
+   :alt: 存储-转发交换
    :align: center
 
-以下序列图摘录显示了从 ``device1`` 发送到 ``device2`` 的包经过交换机的情况，分别为存储-转发和 cut-through（时间轴是线性的）：
-
-.. figure:: media/storeandforwardseq2.png
+.. image:: Pic/seqchart2.png
+   :alt: 直通交换
    :align: center
-   :width: 100%
 
-.. figure:: media/seqchart2.png
+我们比较了存储-转发交换和直通交换中UDP包的端到端延迟：
+
+.. image:: Pic/delay.png
+   :alt: 延迟比较
    :align: center
-   :width: 100%
 
-我们比较了存储-转发切换和 cut-through 切换中 UDP 包的端到端延迟：
+我们可以通过分析来验证结果。在存储-转发的情况下，端到端延迟为 ``3 *（传输时间 + 传播时间）``，约为 25.296 毫秒。在直通交换的情况下，持续时间为 ``1 * 传输时间 + 3 传播时间 + 2 * 直通交换延迟``，约为 8.432 毫秒。
 
-.. figure:: media/delay.png
-   :align: center
-   :width: 100%
-
-我们可以通过分析来验证结果。在存储-转发的情况下，端到端持续时间为 ``3 *（传输时间 + 传播时间）``，约为 25.296 毫秒。在 cut-through 的情况下，持续时间为 ``1 * 传输时间 + 3 传播时间 + 2 * cut-through 延迟``，约为 8.432 毫秒。
-
-来源: :download:`omnetpp.ini <../omnetpp.ini>`, :download:`CutthroughSwitchingShowcase.ned <../CutthroughSwitchingShowcase.ned>`
+源代码：
+   `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/43f185873bdc27fdc40564724e4a64fa/omnetpp.ini>`__ 
+   `CutthroughSwitchingShowcase.ned <https://inet.omnetpp.org/docs/_downloads/8add5c151ff6e797bdd54f614b47cc19/CutthroughSwitchingShowcase.ned>`__
 
 讨论
 ----------
