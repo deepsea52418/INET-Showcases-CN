@@ -48,16 +48,19 @@ INET框架中的直通式交换利用"节点内数据包流" 的机制，以便�
 
 以下序列图摘录显示了从 ``device1`` 发送到 ``device2`` 的包经过交换机的情况。
 存储-转发交换
+
 .. image:: Pic/storeandforwardseq2.png
    :alt: 存储-转发交换
    :align: center
 
 直通交换
+
 .. image:: Pic/seqchart2.png
    :alt: 直通交换
    :align: center
 
 我们比较了存储-转发交换和直通交换中UDP包的端到端延迟：
+
 .. image:: Pic/delay.png
    :alt: 延迟比较
    :align: center
@@ -65,8 +68,8 @@ INET框架中的直通式交换利用"节点内数据包流" 的机制，以便�
 我们可以通过分析来验证结果。在存储-转发的情况下，端到端延迟为 ``3 *（传输时间 + 传播时间）``，约为 25.296ms。在直通交换的情况下，持续时间为 ``1 * 传输时间 + 3 传播时间 + 2 * 直通交换延迟``，约为 8.432ms。
 
 源代码：
-| `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/43f185873bdc27fdc40564724e4a64fa/omnetpp.ini>`__ 
-| `CutthroughSwitchingShowcase.ned <https://inet.omnetpp.org/docs/_downloads/8add5c151ff6e797bdd54f614b47cc19/CutthroughSwitchingShowcase.ned>`__
+|  `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/43f185873bdc27fdc40564724e4a64fa/omnetpp.ini>`__ 
+|  `CutthroughSwitchingShowcase.ned <https://inet.omnetpp.org/docs/_downloads/8add5c151ff6e797bdd54f614b47cc19/CutthroughSwitchingShowcase.ned>`__
 
 讨论
 ----------
