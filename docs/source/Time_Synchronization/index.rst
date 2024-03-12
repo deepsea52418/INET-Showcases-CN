@@ -7,6 +7,8 @@
 
 
 .. toctree::
+    :maxdepth: 1
+    :glob:
     
     demo
     Clock_Drift
