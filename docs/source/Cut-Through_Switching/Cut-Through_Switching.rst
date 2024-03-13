@@ -45,8 +45,6 @@ INET框架中的直通交换利用"节点内数据包流" 的机制，以便在�
 以下视频显示了 Qtenv 中的存储-转发行为：
 
 .. figure:: /Pic/storeandforward.mp4
-   :figwidth: 600
-   :align: center
 
 接下来的视频显示了 cut-through 行为：
 
@@ -76,8 +74,7 @@ INET框架中的直通交换利用"节点内数据包流" 的机制，以便在�
 
 我们可以通过分析来验证结果。在存储-转发的情况下，端到端延迟为 ``3 *（传输时间 + 传播时间）``，约为 25.296ms。在直通交换的情况下，持续时间为 ``1 * 传输时间 + 3 传播时间 + 2 * 直通交换延迟``，约为 8.432ms。
 
-源代码：
-
+| 源代码：
 |  `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/43f185873bdc27fdc40564724e4a64fa/omnetpp.ini>`__ 
 |  `CutthroughSwitchingShowcase.ned <https://inet.omnetpp.org/docs/_downloads/8add5c151ff6e797bdd54f614b47cc19/CutthroughSwitchingShowcase.ned>`__
 
