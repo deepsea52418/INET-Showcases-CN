@@ -61,7 +61,7 @@ INET框架中的直通交换利用"节点内数据包流" 的机制，以便在�
 
 .. raw:: html
 
-   <iframe src="Pic/storeandforward.mp4" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+   <iframe src="Pic/storeandforward.mp4"> </iframe>
 
 以下序列图摘录显示了从 ``device1`` 发送到 ``device2`` 的包经过交换机的情况。
 
