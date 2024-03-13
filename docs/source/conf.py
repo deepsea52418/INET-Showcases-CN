@@ -32,11 +32,7 @@ templates_path = ['_templates']
 # -- Options for HTML output
 
 html_theme = 'sphinx_rtd_theme'
-html_static_path = ["Pic"]
-html_context = {
-    "github_version": "master",
-    "doc_path": "docs",
-}
+html_video_codec = 'h264'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
