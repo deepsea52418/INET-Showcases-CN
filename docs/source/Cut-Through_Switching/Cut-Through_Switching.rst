@@ -48,7 +48,6 @@ INET框架中的直通交换利用"节点内数据包流" 的机制，以便在�
 
    <video controls width="600">
        <source src="Pic/storeandforward.mp4" type="video/mp4">
-       Your browser does not support the video tag.
    </video>
 
 
@@ -57,16 +56,10 @@ INET框架中的直通交换利用"节点内数据包流" 的机制，以便在�
 
 .. figure:: Pic/storeandforward.mp4
 
+
 测试
+.. video:: Pic/storeandforward.mp4 
 
-.. raw:: html
-
-   <video controls src="Pic/storeandforward.mp4"></video>
-
-
-demo
-
-.. video:: Pic/storeandforward.mp4
 
 以下序列图摘录显示了从 ``device1`` 发送到 ``device2`` 的包经过交换机的情况。
 
