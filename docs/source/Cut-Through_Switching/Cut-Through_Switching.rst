@@ -61,27 +61,7 @@ INET框架中的直通交换利用"节点内数据包流" 的机制，以便在�
 
 .. raw:: html
 
-    <figure class="video_container">
-        <video controls width="600">
-            <source src="Pic/storeandforward.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </figure>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var videos = document.querySelectorAll('.video_container video');
-        videos.forEach(function(video) {
-            video.addEventListener('click', function() {
-                if (video.paused) {
-                    video.play();
-                } else {
-                    video.pause();
-                }
-            });
-        });
-    });
-    </script>
+   <video controls src="Pic/storeandforward.mp4"></video>
 
 
 以下序列图摘录显示了从 ``device1`` 发送到 ``device2`` 的包经过交换机的情况。
