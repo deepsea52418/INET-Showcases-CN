@@ -1,5 +1,16 @@
-Pygments
+alabaster
+Babel
+certifi
+charset-normalizer
+docutils
+idna
 imagesize
+Jinja2
+MarkupSafe
+packaging
+Pygments
+requests
+snowballstemmer
 Sphinx
 sphinx-rtd-theme
 sphinxcontrib-applehelp
