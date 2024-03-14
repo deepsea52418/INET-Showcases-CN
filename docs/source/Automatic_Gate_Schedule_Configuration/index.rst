@@ -5,14 +5,17 @@
 
 人们需要为不同的流量类别指定约束，例如最大延迟，配置器会自动计算和配置满足这些约束的门时间表。
 
-目前，INET 包含三个门调度配置器模型： 
-- :ned:`EagerGateScheduleConfigurator`: 这是一个简易模型，它会快速生成门控列表。即使存在可行解，它也可能调度失败。 
-- :ned:`Z3GateScheduleConfigurator`: 它使用基于SAT求解器的方法来查找满足延迟和抖动要求的解决方案。 
-- :ned:`TSNschedGateScheduleConfigurator`: 它使用外部工具而不是内置功能。 
+目前，INET 包含三个门调度配置器模型：
+ 
++ `EagerGateScheduleConfigurator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.configurator.gatescheduling.common.EagerGateScheduleConfigurator.html>`__ : 这是一个简易模型，它会快速生成门控列表。即使存在可行解，它也可能调度失败。 
++ `Z3GateScheduleConfigurator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.configurator.gatescheduling.z3.Z3GateScheduleConfigurator.html>`__ : 它使用基于SAT求解器的方法来查找满足延迟和抖动要求的解决方案。 
++ `TSNschedGateScheduleConfigurator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.configurator.gatescheduling.common.TSNschedGateScheduleConfigurator.html>`__ : 它使用外部工具而不是内置功能。 
 
 以下示例演示了时间感知整形的门调度：
 
 .. toctree::
+    :maxdepth: 1
+    :glob:
 
     Eager_Gate_Schedule_Configuration
     SAT-Solver-based_Gate_Schedule_Configuration

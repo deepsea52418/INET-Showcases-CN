@@ -1,7 +1,8 @@
 直通交换
 ==============================
 
-本文内容，请参见 `讲解视频 <https://space.bilibili.com/35942145>`__
+| `原文链接 <https://inet.omnetpp.org/docs/showcases/tsn/cutthroughswitching/doc/index.html>`__ 
+| `讲解视频 <https://space.bilibili.com/35942145>`__
 
 
 目标

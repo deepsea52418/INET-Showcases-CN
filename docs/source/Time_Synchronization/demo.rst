@@ -1,7 +1,6 @@
 Demo
 ================
 
-4号
 
 这是一个图片
 --------------
@@ -12,19 +11,7 @@ Demo
 
 这是一个视频
 ------------
-.. video_noloop:: Pic/onemasterclock.mp4
-   :align: center
+.. figure:: Pic/onemasterclock.mp4
 
 
-这是一个外链视频
-----------------
-
-.. raw:: html
-   <iframe src="//player.bilibili.com/player.html?aid=283448464&bvid=BV1Wc411t7TD&cid=1399372456&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-.. <iframe src="//player.bilibili.com/player.html?aid=283448464&bvid=BV1Wc411t7TD&cid=1399372456&p=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
-
-
-.. <iframe src="//player.bilibili.com/player.html?aid=283448464&bvid=BV1Wc411t7TD&cid=1399372456&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
-n/a
+注意：目前视频无法直接播放，需要右键，选择【显示所有控件】才可以播放

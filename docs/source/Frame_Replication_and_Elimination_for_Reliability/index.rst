@@ -6,6 +6,8 @@
 以下示例演示了与帧复制相关的主题：
 
 .. toctree::
+    :maxdepth: 1
+    :glob:
 
     Manual_Stream_Configuration
     Automatic_Multipath_Stream_Configuration

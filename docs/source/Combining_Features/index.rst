@@ -7,7 +7,9 @@
 
 
 .. toctree::
-
+    :maxdepth: 1
+    :glob:
+    
     Effects_of_Time_Synchronization_on_Time-Aware_Shaping
     Frame_Replication_with_Time-Aware_Shaping
     In-vehicle_Network

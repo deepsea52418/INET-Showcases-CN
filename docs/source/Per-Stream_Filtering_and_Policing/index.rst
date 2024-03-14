@@ -7,7 +7,9 @@
 
 
 .. toctree::
-
+    :maxdepth: 1
+    :glob:
+    
     Token_Bucket_based_Policing
     Statistical_Policing
     Peeking_Under_the_Hood

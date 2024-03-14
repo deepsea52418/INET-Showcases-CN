@@ -7,7 +7,9 @@
 
 
 .. toctree::
-
+    :maxdepth: 1
+    :glob:
+    
     Time-Aware_Shaping
     Credit-Based_Shaping
     Asynchronous_Traffic_Shaping
