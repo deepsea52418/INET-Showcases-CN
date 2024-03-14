@@ -1,6 +1,7 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information
+import sphinx_rtd_theme
 
 project = 'INET Showcases CN'
 copyright = '2024, Deepsea52418'
@@ -12,6 +13,8 @@ version = '0.1.0'
 # -- General configuration
 
 extensions = [
+    'sphinxnotes.strike',
+    'sphinx.ext.graphviz',
     'sphinx.ext.duration',
     'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
@@ -19,6 +22,7 @@ extensions = [
     'sphinx.ext.imgconverter',
     'sphinx.ext.intersphinx',
     'sphinxcontrib.video',
+    'sphinxcontrib.youtube',
 ]
 
 intersphinx_mapping = {
