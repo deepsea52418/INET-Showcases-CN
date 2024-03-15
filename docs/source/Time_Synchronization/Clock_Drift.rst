@@ -48,7 +48,7 @@ Source files location:
 
 通用精确时间协议（gPTP，或 IEEE 802.1AS）可以在以太网中以TSN协议所需的高精确度来同步时钟。它在INET中由 `Gptp <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.ieee8021as.Gptp.html>`__ 模块实现。\
 多种网络节点类型，如 `EthernetSwitch <https://doc.omnetpp.org/inet/api-current/neddoc/inet.node.ethernet.EthernetSwitch.html>`__，具有可选的gPTP模块。可以通过 ``hasGptp``参数激活。该模块可以作为应用程序插入到主机中。\
-有关 `Gptp <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.ieee8021as.Gptp.html>`__的更多详细信息，请查看 `Using gPTP <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/Time_Synchronization/Using_gPTP.html>`__ \
+有关 `Gptp <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.ieee8021as.Gptp.html>`__ 的更多详细信息，请查看 `Using gPTP <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/Time_Synchronization/Using_gPTP.html>`__ \
 示例或模块的NED文档。
 
 在进行时钟同步时，同步器会更新本地时钟的当前时间。此外，它们还通过设置振荡器补偿来更新本地时钟的漂移率。SimpleClockSynchronizer使用一种带外机制读取实际的时钟漂移率，并相应地设置振荡器补偿。使用Gptp时，振荡器补偿是基于最后两个时间同步事件来设置的。
@@ -124,8 +124,7 @@ Source files location:
    :alt: ConstantClockDrift.png
    :align: center
 
-三个时钟的漂移速率不同。与 ``switch1``相比， ``source1``和 ``source2``的漂移大小和方向也不同，即 ``source1``的时钟比 ``switch1``的时钟快，而 \
-``source2``的时钟比 ``switch1``的时钟慢。
+三个时钟的漂移速率不同，与 ``switch1`` 相比， ``source1`` 和 ``source2`` 的漂移大小和方向也不同，即 ``source1`` 的时钟比 ``switch1`` 的时钟快，而 ``source2`` 的时钟比 ``switch1`` 的时钟慢。
 
 .. note::
    可以利用统计出的 ``timeChanged:vector``数据，并以 ``-1``作为参数进行线性趋势运算，可以绘制出本地时钟与全局仿真时间的差值的图表。
@@ -135,7 +134,7 @@ Source files location:
 
 在此配置中，网络中节点的本地时钟漂移速率与之前的配置相同，但它们会通过一个带外机制（C++函数调用）定期进行同步。
 
-带外同步设置在基本配置 ``OutOfBandSyncBase``中定义，我们可以扩展它
+带外同步设置在基本配置 ``OutOfBandSyncBase`` 中定义，我们可以扩展它
 
 .. code:: cpp
 
@@ -154,12 +153,12 @@ Source files location:
    *.source*.app[1].synchronizationClockTimeError = uniform(-10ns, 10ns)
 
 由于我们想要进行时钟同步，所以我们需要设置本地时钟，因此网络中节点需要具有 `SettableClock <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.model.SettableClock.html>`__ \
-模块。设置 ``defaultOverdueClockEventHandlingMode = "execute"``表示在设置本地时钟时间前，过期的事件会被立即执行。我们使用 \ 
+模块。设置 ``defaultOverdueClockEventHandlingMode = "execute"`` 表示在设置本地时钟时间前，过期的事件会被立即执行。我们使用 \ 
 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 进行带外同步。 \
 该同步器作为应用层程序，我们需要为每个主机中的同步器指定同步的主时钟。在此示例中，我们指定同步器与 ``switch1``的时钟进行同步。同时，我们为同步器设置了一个小的随机 \
 同步误差，使时钟时间不会被完全同步。
 
-对于 ``ConstantClockDriftOutOfBandSync``示例，此示例集成了 ``ConstantClockDrift``示例和 ``OutOfBandSyncBase``示例，不需要额外的配置。
+对于 ``ConstantClockDriftOutOfBandSync`` 示例，此示例集成了 ``ConstantClockDrift`` 示例和 ``OutOfBandSyncBase`` 示例，不需要额外的配置。
 
 .. code:: cpp
 
