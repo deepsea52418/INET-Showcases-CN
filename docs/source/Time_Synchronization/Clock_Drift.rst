@@ -80,26 +80,24 @@ Source files location:
 使用相同的漂移率，但实际的漂移率在不同的配置之间可能会有所不同。在具有时钟同步的配置中，主机被同步到 ``switch1``的时间。\
 我们绘制各节点本地时钟和全局模拟时间的时间差，以观察本地时钟与全局模拟时间之间的差异。
 
-Example: No Clock Drift
+示例：无时钟漂移
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-在这种配置中，网络节点没有时钟。应用程序和门调度通过模拟时间进行同步。（将与其他三种情况下的端到端延迟进行对比。）
+在此配置中，网络节点没有时钟。应用程序和门控调度机制通过模拟时间进行同步。（用于与其他三种情况下的端到端延迟对比）
 
-没有时钟，所以配置为空
+由于没有配置本地时钟，所以相关配置为空
 
 .. code:: cpp
 
    [Config NoClockDrift]
    description = "Without clocks, network nodes are synchronized by simulation time"
 
-Example: Constant Clock Drift
+示例: 固定时钟漂移
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在这种配置中，所有网络节点都有一个具有恒定漂移速率的时钟。时钟随着时间的推移逐渐偏离彼此。
+在此配置中，网络中所有节点都有一个具有恒定漂移速率的本地时钟。时钟随着时间的推移逐渐漂移。
 
-这是配置：
-
-.. code:: c++
+.. code:: cpp
 
    [Config ConstantClockDrift]
    description = "Clocks with constant drift rate diverge over time"
@@ -115,32 +113,29 @@ Example: Constant Clock Drift
    *.switch1.clock.oscillator.driftRate = 300ppm
    *.switch1.eth[0].macLayer.queue.gate[*].clockModule = "^.^.^.^.clock"
 
-我们配置网络节点以具有基于振荡器的时钟模块，使用恒定漂移振荡器。我们还设置振荡器的漂移速率。通过为不同的时钟设置不同的漂移速率，我们可以控制它们随时间的发散。请，漂移速率是相对于模拟时间定义的。此外，我们需要明确告知相关模块（在这里是UDP应用程序和
-``switch1``
-的队列）使用主机中的时钟模块，否则它们将默认使用全局模拟时间。
+我们为网络中所有节点配置基于振荡器的时钟模块 `OscillatorBasedClock <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.model.OscillatorBasedClock.html>`__ , \
+并采用固定时钟漂移速率的振荡器模块 `ConstantDriftOscillator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.oscillator.ConstantDriftOscillator.html>`__ 。 \
+通过为不同的时钟设置不同的漂移速率，我们可以控制它们随时间的发散。漂移速率是相对于全局仿真时间定义的。此外，我们需要明确指定相关模块所依赖的本地时钟（在本示例中为UDP应用程序和Switch1的队列）， \
+否则他们默认依赖全局仿真时间。
 
-这是随时间变化的漂移（时间差）：
+此图展示了随时间变化的本地时钟漂移情况（即本地时钟与全局仿真时间的差值）：
 
 .. image:: Pic/ConstantClockDrift.png
    :alt: ConstantClockDrift.png
    :align: center
 
-三个时钟的漂移速率不同。与 ``switch1`` 相比， ``source1`` 和 ``source2``
-的漂移大小和方向也不同，即 ``source1`` 的时钟比 ``switch1`` 的时钟快，而
-``source2`` 的时钟比 ``switch1`` 的时钟慢。
+三个时钟的漂移速率不同。与 ``switch1``相比， ``source1``和 ``source2``的漂移大小和方向也不同，即 ``source1``的时钟比 ``switch1``的时钟快，而 \
+``source2``的时钟比 ``switch1``的时钟慢。
 
-**NOTE**
+.. note::
+   可以利用统计出的 ``timeChanged:vector``数据，并以 ``-1``作为参数进行线性趋势运算，可以绘制出本地时钟与全局仿真时间的差值的图表。
 
-可以通过绘制 ``timeChanged:vector``
-统计数据，并应用线性趋势操作（参数为-1），轻松制作出一个时钟时间差与模拟时间的图表。
-
-Example: Out-of-Band Synchronization of Clocks, Constant Drift
+示例: 固定时钟偏移与带外时钟同步
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在这种配置中，网络节点时钟的漂移速率与之前的配置相同，但它们会通过一个带外机制（C++函数调用）定期进行同步。
+在此配置中，网络中节点的本地时钟漂移速率与之前的配置相同，但它们会通过一个带外机制（C++函数调用）定期进行同步。
 
-带外同步设置在基本配置 ``OutOfBandSyncBase``
-中定义，我们可以进行扩展Example: Random Clock Drift Rate
+带外同步设置在基本配置 ``OutOfBandSyncBase``中定义，我们可以扩展它
 
 .. code:: cpp
 
@@ -158,15 +153,13 @@ Example: Out-of-Band Synchronization of Clocks, Constant Drift
    *.source*.app[1].synchronizationInterval = 500us
    *.source*.app[1].synchronizationClockTimeError = uniform(-10ns, 10ns)
 
-由于我们想要使用时钟同步，所以我们需要能够设置时钟，因此网络节点具有\ `SettableClock <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.model.SettableClock.html>`__
-模块。设置 ``defaultOverdueClockEventHandlingMode = "execute"``
-表示在向前设置时钟时，过期的事件会立即执行。我们使用\ `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__
-进行带外同步。同步器模块被实现为应用程序，因此我们在每个源主机的应用程序槽中添加一个同步器模块。我们将同步器模块设置为与
-``switch1``
-的时钟同步。我们为同步设置了一个小的随机时钟误差，因此时钟时间不会完全同步。
+由于我们想要进行时钟同步，所以我们需要设置本地时钟，因此网络中节点需要具有 `SettableClock <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.model.SettableClock.html>`__ \
+模块。设置 ``defaultOverdueClockEventHandlingMode = "execute"``表示在设置本地时钟时间前，过期的事件会被立即执行。我们使用 \ 
+`SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 进行带外同步。 \
+该同步器作为应用层程序，我们需要为每个主机中的同步器指定同步的主时钟。在此示例中，我们指定同步器与 ``switch1``的时钟进行同步。同时，我们为同步器设置了一个小的随机 \
+同步误差，使时钟时间不会被完全同步。
 
-对于恒定的时钟漂移率，此配置扩展 ``ConstantClockDrift``
-。对于同步，它也扩展 ``OutOfBandSyncBase`` 。否则，配置为空：
+对于 ``ConstantClockDriftOutOfBandSync``示例，此示例集成了 ``ConstantClockDrift``示例和 ``OutOfBandSyncBase``示例，不需要额外的配置。
 
 .. code:: cpp
 
@@ -174,26 +167,26 @@ Example: Out-of-Band Synchronization of Clocks, Constant Drift
    description = "Clocks are periodically synchronized out-of-band, without a real protocol. Clocks use constant drift oscillators."
    extends = OutOfBandSyncBase, ConstantClockDrift
 
-让我们看看时间差异：
+此图为时间同步后的效果：
 
 .. image:: Pic/OutOfBandSyncConstant.png
    :alt: OutOfBandSyncConstant.png
    :align: center
 
-与模拟时间相比， ``switch1``
-的时钟存在一个恒定的漂移速率。由于所有时钟的漂移速率都是恒定的，第一次同步事件之后，通过设置同步时钟的振荡器补偿，可以弥补漂移速率的差异。之后，所有时钟与
-``switch1`` 的时钟具有相同的漂移速率。让我们放大上图的开始部分：
+与全局仿真时间相比， ``switch1``的时钟存在一个恒定的漂移速率。由于所有时钟的漂移速率都是恒定的，\
+在第一次同步之后，通过设置本地时钟的振荡器补偿，可以弥补漂移速率的差异。之后，所有时钟与 ``switch1`` 的时钟具有相同的漂移速率。让我们放大上图的起始部分：
 
 .. image:: Pic/OutOfBandSyncConstantZoomed.png
    :alt: OutOfBandSyncConstantZoomed.png
    :align: center
 
-在模拟开始时，时钟的漂移速率不同，直到第一次同步事件中的漂移速率得到补偿。漂移速率被完全补偿，但时间与我们配置的小随机误差同步（注意同步后行之间的小距离，每次同步事件时会随机变化）。
+在仿真开始时，时钟的漂移速率不同，在第一次同步后，本地时钟的振荡器得到补偿。但由于我们设置了小的随机误差，在每次同步后时间会发生微小变化。
 
-Example: Random Clock Drift Rate
+示例：随机时钟漂移
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在这个配置中，时钟使用RandomDriftOscillator模块，通过随机漫步的过程周期性地改变漂移率。漂移率变化的幅度为每个振荡器指定一个不同的分布。此外，漂移率变化的间隔被设置为恒定值。以下是配置信息：
+在此配置中，本地时钟使用随机时钟漂移振荡器 `RandomDriftOscillator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.oscillator.RandomDriftOscillator.html>`__ 模块。 \
+指定随机时钟漂移振荡器的漂移范围和漂移间隔，使本地时钟时间随机偏移。以下是配置信息：
 
 .. code:: cpp
 
@@ -214,18 +207,16 @@ Example: Random Clock Drift Rate
    *.switch1.clock.oscillator.changeInterval = 0.1ms
    *.switch1.eth[0].macLayer.queue.gate[*].clockModule = "^.^.^.^.clock"
 
-The following chart displays how the clocks diverge over time:
-以下图表显示了随着时间的推移，时钟的差异
+下图显示了随着时间的推移，本地时钟与全局仿真时间的差异
 
 .. image:: Pic/RandomClockDrift.png
    :alt: RandomClockDrift.png
    :align: center
 
-Example:Out-of-Band Synchronization of Clocks, Random Drift
+示例：随机时钟偏移与带外时钟同步
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-该配置通过一个周期性的带外同步机制（使用跨网络节点的C++函数调用）扩展了之前的配置，该机制在
-``OutOfBandSyncBase`` 配置中定义
+对于 ``RandomClockDriftOutOfBandSync``示例，此示例集成了 ``RandomClockDrift``示例和 ``OutOfBandSyncBase``示例，不需要额外的配置。
 
 .. code:: cpp
 
@@ -233,27 +224,24 @@ Example:Out-of-Band Synchronization of Clocks, Random Drift
    description = "Clocks are periodically synchronized out-of-band, without a real protocol. Clocks use random drift oscillators."
    extends = OutOfBandSyncBase, RandomClockDrift
 
-与不断漂移速率+带外同步情况相同，我们指定一个小的随机时钟时间同步错误，但没有漂移速率同步错误。
+和固定时钟偏移与带外时钟同步情况相同，我们指定了一个小的随机时钟同步误差，但没有漂移速率同步错误。
 
 .. image:: Pic/OutOfBandSyncRandom.png
    :alt: OutOfBandSyncRandom.png
    :align: center
 
-switch1的时钟一直在漂移，但源的时钟与其同步。这是同样的图表，但放大了：
+switch1的时钟一直在漂移，但 ``source1``和 ``source2``的本地时钟与其同步。将上图放大后：
 
 .. image:: Pic/OutOfBandSyncRandomZoomed.png
    :alt: OutOfBandSyncRandomZoomed.png
    :align: center
 
-时钟漂移的速率是完全同步的，因此源的线与 ``switch1``
-在同步点处相切。然而，在同步事件之间，时钟会漂移，因此分歧会增加，直到再次同步。
+由于时钟漂移的速率是相同的，因此 ``source1``、 ``source2``和 ``switch1``的时间线在同步点处相切。然而，在同步后，时钟会重新漂移。
 
-Example:Synchronizing Clocks Using gPTP
+示例：使用gPTP进行同步
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在这种配置中，网络节点的时钟漂移率与前两种配置相同，但它们会定期使用通用精确时间协议（gPTP）与主时钟进行同步。该协议测量各个链路的延迟，并通过生成树在网络上传播主时钟的时间。
-
-这是配置
+在此配置中，网络节点的时钟漂移率与前两种配置相同，但它们会定期使用通用精确时间协议（gPTP）与主时钟进行同步。该协议测量各个链路的延迟，并通过生成树在网络上传播主时钟的时间。
 
 .. code:: cpp
 
@@ -284,14 +272,13 @@ Example:Synchronizing Clocks Using gPTP
    *.source*.app[1].syncInterval = 500us
    *.source*.app[1].pdelayInterval = 1ms
 
-这里是时间差异：
+此图为本地时间与全局仿真时间的差异：
 
 .. image:: Pic/GptpSync.png
    :alt: GptpSync.png
    :align: center
 
-``switch1`` 的时钟具有周期性变化的随机漂移率，而其他时钟则周期性地与
-``switch1`` 同步。
+``switch1`` 的时钟具有周期性变化的随机漂移率，其他时钟周期性地与 ``switch1``进行同步。
 
 这是上面的图表放大后的部分：
 
@@ -299,12 +286,12 @@ Example:Synchronizing Clocks Using gPTP
    :alt: GptpSyncZoomed.png
    :align: center
 
-根据前两次同步事件计算得出的漂移率差异，用于设置振荡器补偿。
+根据前两次同步事件可以计算出时钟漂移率的差异，用于设置振荡器补偿。
 
-Accuracy of Synchronization
+同步精度
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-时间同步的精度可以通过放大上述时钟时间图来可视化。我们可以检查源主机时间发生变化的时刻。新时间与参考时间的距离显示了时间同步的精度。
+时间同步的精度可以通过放大上述时钟时间图来可视化。我们可以观察源主机中发生时间同步的时刻，新时间与参考时间（即主时钟时间）的距离表示时间同步的精度。
 
 .. image:: Pic/gptp_time_accuracy.png
    :alt: gptp_time_accuracy.png
@@ -316,46 +303,21 @@ Accuracy of Synchronization
    :alt: GptpSync_RateAccuracy.png
    :align: center
 
-同步使得线条更加平行，即漂移速率更加接近。此外，请注意，由于随机游走过程，漂移速率有时会在同步事件之间发生变化。
+同步使得线条更加平行，即漂移速率更加接近。此外，由于设置了时钟的随机漂移速率，漂移速率会在同步事件之间发生变化。
 
-我们为SimpleClockSynchronizer配置了一个随机分布的时间同步错误，但没有漂移率补偿错误。在gPTP的情况下，准确性是不可设置的，而是协议操作的一种紧急属性。此外，gPTP同步本质上存在一些漂移率补偿错误。
+我们为SimpleClockSynchronizer配置了一个随机分布的时间同步误差，但没有漂移率补偿错误。在gPTP的情况下，准确性是不可设置的，而是协议所包含的属性。此外，gPTP同步本质上存在一些漂移率补偿错误。
 
-**NOTE**
+.. note::
+   -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationClockTimeError``参数配置为0时，同步时间与参考时间完全一致。
+   -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationOscillatorCompensationError``参数配置为0时，补偿的时钟漂移率与参考时间完全匹配。否则，误差可以用PPM指定。
+   -  使用任何同步方法时，时钟之间的时钟时间差非常小，大约为微秒级别。
 
-同步使得线条更加平行，即漂移速率更加接近。此外，请注意，由于随机游走过程，漂移速率有时会在同步事件之间发生变化。
-
-我们为SimpleClockSynchronizer配置了一个随机分布的时间同步错误，但没有漂移率补偿错误。在gPTP的情况下，准确性是不可设置的，而是协议操作的一种紧急属性。此外，gPTP同步本质上存在一些漂移率补偿错误。
-
-**NOTE**
-
--  当将
-   `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__
-   配置为 ``synchronizationClockTimeError``
-   为0时，同步时间与参考时间完全匹配。
-
--  当配置
-   `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__
-   时，使用 ``synchronizationOscillatorCompensationError``
-   为0时，补偿的时钟漂移率与参考时间完全匹配。否则，误差可以用PPM指定。
-
--  使用任何同步方法时，时钟之间的时钟时间差非常小，大约为微秒级别。
-
--  当将SimpleClockSynchronizer配置为
-   ``synchronizationClockTimeError`` 为0时，同步时间与参考时间完全匹配。
-
--  当配置SimpleClockSynchronizer时，使用
-   ``synchronizationOscillatorCompensationError``
-   为0时，补偿的时钟漂移率与参考时间完全匹配。否则，误差可以用PPM指定。
-
--  使用任何同步方法时，时钟之间的时钟时间差非常小，大约为微秒级别。
-
-Effects of Clock Drift on End-to-end Delay
+时钟漂移对端到端延迟的影响
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 本节旨在展示时钟漂移对网络操作的深远影响。我们通过四个示例来观察端到端延迟，以展示这种影响。
 
-为了达到这个目的，在所有的模拟中， ``switch1``
-中的以太网MAC层被配置为每10微秒交替转发来自 ``source1`` 和 ``source2``
+为了达到这个目的，在所有的模拟中， ``switch1``中的以太网MAC层被配置为每10微秒交替转发来自 ``source1`` 和 ``source2``
 的数据包；请注意，UDP应用程序每20微秒发送一个数据包，其中 ``source2``
 的数据包与 ``source1`` 相比偏移了10微秒。因此，来自两个源的数据包在
 ``switch1`` 中有一个发送窗口，并且源会根据该发送窗口生成和发送数据包到
