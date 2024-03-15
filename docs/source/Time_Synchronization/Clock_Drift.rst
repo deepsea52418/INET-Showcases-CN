@@ -47,7 +47,7 @@ Source files location:
 步间隔可以通过参数进行配置。此外，为了模拟现实生活中的同步协议，其本质上有一定的不准确性，精度可以被指定（详见模块的NED文档）。
 
 通用精确时间协议（gPTP，或 IEEE 802.1AS）可以在以太网中以TSN协议所需的高精确度来同步时钟。它在INET中由 `Gptp <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.ieee8021as.Gptp.html>`__ 模块实现。\
-多种网络节点类型，如 `EthernetSwitch <https://doc.omnetpp.org/inet/api-current/neddoc/inet.node.ethernet.EthernetSwitch.html>`__，具有可选的gPTP模块。可以通过 ``hasGptp``参数激活。该模块可以作为应用程序插入到主机中。\
+多种网络节点类型，如 `EthernetSwitch <https://doc.omnetpp.org/inet/api-current/neddoc/inet.node.ethernet.EthernetSwitch.html>`__，具有可选的gPTP模块。可以通过 ``hasGptp`` 参数激活。该模块可以作为应用程序插入到主机中。\
 有关 `Gptp <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.ieee8021as.Gptp.html>`__ 的更多详细信息，请查看 `Using gPTP <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/Time_Synchronization/Using_gPTP.html>`__ \
 示例或模块的NED文档。
 
@@ -71,7 +71,7 @@ Source files location:
 -  ``RandomClockDriftOutOfBandSync``: 时钟具有周期性变化的随机时钟漂移率，并通过一种带外同步方法（无实际协议）进行同步
 -  ``RandomClockDriftGptpSync``: 时钟具有随机的、周期性变化的随机时钟漂移率，并通过gPTP进行同步
 
-在 ``General``配置中， ``source1`` 被配置为向 ``sink1`` 发送UDP数据包，而 ``source2``则向 ``sink2``发送。
+在 ``General`` 配置中， ``source1`` 被配置为向 ``sink1`` 发送UDP数据包，而 ``source2`` 则向 ``sink2`` 发送。
 
 .. note::
    为了展示时钟漂移对网络流量的影响，我们在 ``switch1``中配置TAS机制，使其每10μs交替转发来自source1和source1的帧。这不会影响后文中的仿真结果，但是时钟漂移会影响报文的端到端延迟。有关此配置部分的更多详细信息，请参阅 `该部分 <>`__ 。
@@ -127,7 +127,7 @@ Source files location:
 三个时钟的漂移速率不同，与 ``switch1`` 相比， ``source1`` 和 ``source2`` 的漂移大小和方向也不同，即 ``source1`` 的时钟比 ``switch1`` 的时钟快，而 ``source2`` 的时钟比 ``switch1`` 的时钟慢。
 
 .. note::
-   可以利用统计出的 ``timeChanged:vector``数据，并以 ``-1``作为参数进行线性趋势运算，可以绘制出本地时钟与全局仿真时间的差值的图表。
+   可以利用统计出的 ``timeChanged:vector`` 数据，并以 ``-1`` 作为参数进行线性趋势运算，可以绘制出本地时钟与全局仿真时间的差值的图表。
 
 示例: 固定时钟偏移与带外时钟同步
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -155,7 +155,7 @@ Source files location:
 由于我们想要进行时钟同步，所以我们需要设置本地时钟，因此网络中节点需要具有 `SettableClock <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.model.SettableClock.html>`__ \
 模块。设置 ``defaultOverdueClockEventHandlingMode = "execute"`` 表示在设置本地时钟时间前，过期的事件会被立即执行。我们使用 \ 
 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 进行带外同步。 \
-该同步器作为应用层程序，我们需要为每个主机中的同步器指定同步的主时钟。在此示例中，我们指定同步器与 ``switch1``的时钟进行同步。同时，我们为同步器设置了一个小的随机 \
+该同步器作为应用层程序，我们需要为每个主机中的同步器指定同步的主时钟。在此示例中，我们指定同步器与 ``switch1`` 的时钟进行同步。同时，我们为同步器设置了一个小的随机 \
 同步误差，使时钟时间不会被完全同步。
 
 对于 ``ConstantClockDriftOutOfBandSync`` 示例，此示例集成了 ``ConstantClockDrift`` 示例和 ``OutOfBandSyncBase`` 示例，不需要额外的配置。
@@ -172,7 +172,7 @@ Source files location:
    :alt: OutOfBandSyncConstant.png
    :align: center
 
-与全局仿真时间相比， ``switch1``的时钟存在一个恒定的漂移速率。由于所有时钟的漂移速率都是恒定的，\
+与全局仿真时间相比， ``switch1`` 的时钟存在一个恒定的漂移速率。由于所有时钟的漂移速率都是恒定的，\
 在第一次同步之后，通过设置本地时钟的振荡器补偿，可以弥补漂移速率的差异。之后，所有时钟与 ``switch1`` 的时钟具有相同的漂移速率。让我们放大上图的起始部分：
 
 .. image:: Pic/OutOfBandSyncConstantZoomed.png
@@ -215,7 +215,7 @@ Source files location:
 示例：随机时钟偏移与带外时钟同步
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-对于 ``RandomClockDriftOutOfBandSync``示例，此示例集成了 ``RandomClockDrift``示例和 ``OutOfBandSyncBase``示例，不需要额外的配置。
+对于 ``RandomClockDriftOutOfBandSync`` 示例，此示例集成了 ``RandomClockDrift`` 示例和 ``OutOfBandSyncBase`` 示例，不需要额外的配置。
 
 .. code:: cpp
 
@@ -229,13 +229,13 @@ Source files location:
    :alt: OutOfBandSyncRandom.png
    :align: center
 
-switch1的时钟一直在漂移，但 ``source1``和 ``source2``的本地时钟与其同步。将上图放大后：
+switch1的时钟一直在漂移，但 ``source1`` 和 ``source2`` 的本地时钟与其同步。将上图放大后：
 
 .. image:: Pic/OutOfBandSyncRandomZoomed.png
    :alt: OutOfBandSyncRandomZoomed.png
    :align: center
 
-由于时钟漂移的速率是相同的，因此 ``source1``、 ``source2``和 ``switch1``的时间线在同步点处相切。然而，在同步后，时钟会重新漂移。
+由于时钟漂移的速率是相同的，因此 ``source1`` 、 ``source2`` 和 ``switch1`` 的时间线在同步点处相切。然而，在同步后，时钟会重新漂移。
 
 示例：使用gPTP进行同步
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -277,7 +277,7 @@ switch1的时钟一直在漂移，但 ``source1``和 ``source2``的本地时钟�
    :alt: GptpSync.png
    :align: center
 
-``switch1`` 的时钟具有周期性变化的随机漂移率，其他时钟周期性地与 ``switch1``进行同步。
+ ``switch1`` 的时钟具有周期性变化的随机漂移率，其他时钟周期性地与 ``switch1`` 进行同步。
 
 这是上面的图表放大后的部分：
 
@@ -307,8 +307,8 @@ switch1的时钟一直在漂移，但 ``source1``和 ``source2``的本地时钟�
 我们为SimpleClockSynchronizer配置了一个随机分布的时间同步误差，但没有漂移率补偿错误。在gPTP的情况下，准确性是不可设置的，而是协议所包含的属性。此外，gPTP同步本质上存在一些漂移率补偿错误。
 
 .. note::
-   -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationClockTimeError``参数配置为0时，同步时间与参考时间完全一致。
-   -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationOscillatorCompensationError``参数配置为0时，补偿的时钟漂移率与参考时间完全匹配。否则，误差可以用PPM指定。
+   -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationClockTimeError`` 参数配置为0时，同步时间与参考时间完全一致。
+   -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationOscillatorCompensationError`` 参数配置为0时，补偿的时钟漂移率与参考时间完全匹配。否则，误差可以用PPM指定。
    -  使用任何同步方法时，时钟之间的时钟时间差非常小，大约为微秒级别。
 
 时钟漂移对端到端延迟的影响
@@ -316,8 +316,8 @@ switch1的时钟一直在漂移，但 ``source1``和 ``source2``的本地时钟�
 
 本节旨在展示时钟漂移对网络操作的深远影响。我们通过四个示例来观察端到端延迟，以展示这种影响。
 
-为了达到这个目的，在所有的模拟中， ``switch1``中的以太网MAC层被配置为每10微秒交替转发来自 ``source1`` 和 ``source2``
-的数据包；请注意，UDP应用程序每20微秒发送一个数据包，其中 ``source2``
+为了达到这个目的，在所有的模拟中， ``switch1`` 中的以太网MAC层被配置为每10微秒交替转发来自 ``source1`` 和 ``source2`` 
+的数据包；请注意，UDP应用程序每20微秒发送一个数据包，其中 ``source2`` 
 的数据包与 ``source1`` 相比偏移了10微秒。因此，来自两个源的数据包在
 ``switch1`` 中有一个发送窗口，并且源会根据该发送窗口生成和发送数据包到
 ``switch1`` （只有当节点中的时钟同步时，它们才会同步，我们稍后会看到）。
