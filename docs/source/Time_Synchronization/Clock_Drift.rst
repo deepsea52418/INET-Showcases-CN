@@ -38,7 +38,7 @@ Source files location:
 +  `ConstantDriftOscillator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.oscillator.ConstantDriftOscillator.html>`__: 以恒定的漂移速率周期性地生成脉冲，用于模拟恒定速率的时钟漂移
 +  `RandomDriftOscillator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.oscillator.RandomDriftOscillator.html>`__: 随机漂移振荡器：振荡器随时间改变漂移速率；用于模拟随机时钟漂移
 
-同步器是作为应用层模块实现的。对于时钟同步，同步器模块需要设置时钟的时间，因此只有可设置时钟 `SettableClock`支持同步。以下同步器模块可用：
+同步器是作为应用层模块实现的。对于时钟同步，同步器模块需要设置时钟的时间，因此只有可设置时钟 ``SettableClock`` 支持同步。以下同步器模块可用：
 
 +  `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__: 使用带外机制来同步时钟，而不是使用真正的时钟同步协议。适用于不关注时钟同步细节的场景。
 +  `Gptp <https://doc.omnetpp.org/inet/api-current/neddoc/inet.linklayer.ieee8021as.Gptp.html>`__: 使用通用精确时间协议来同步时钟。
@@ -319,7 +319,7 @@ switch1的时钟一直在漂移，但 ``source1`` 和 ``source2`` 的本地时�
 为了达到这个目的，在所有的模拟中， ``switch1`` 中的以太网MAC层被配置为每10微秒交替转发来自 ``source1`` 和 ``source2`` 的数据包；UDP应用程序每20微秒发送一个数据包，其中 ``source2`` \
 的数据包与 ``source1`` 相比偏移了10微秒。因此，当 ``source1`` 和 ``source2`` 的时间与 ``switch1`` 的时间完全同步时，刚好可以在指定的时隙窗口中完成传输。
 
-在此配置中，我们在 ``switch1``的EthernetMacLayer模块中配置了一个GatingPriorityQueue模块，其内部包含两个队列：
+在此配置中，我们在 ``switch1`` 的EthernetMacLayer模块中配置了一个GatingPriorityQueue模块，其内部包含两个队列：
 
 .. code:: ini
 
@@ -345,7 +345,7 @@ GatingPriorityQueue中的内部队列都有自己的门，这些门连接到一�
    *.switch1.eth[0].macLayer.queue.gate[0].offset = 3.118us
    *.switch1.eth[0].macLayer.queue.gate[1].offset = 13.118us
 
-以下是源节点相关配置，源节点中应用程序每20μs生成一个UDP数据包，并且 ``source2``相比 ``source1`` ，偏移10μs：
+以下是源节点相关配置，源节点中应用程序每20μs生成一个UDP数据包，并且 ``source2`` 相比 ``source1`` ，偏移10μs：
 
 .. code:: ini
 
@@ -376,7 +376,7 @@ GatingPriorityQueue中的内部队列都有自己的门，这些门连接到一�
    :alt: delay_outofbandsync.png
    :align: center
 
-在仿真开始时，由于时钟之间的漂移率差异且尚未进行时间同步，因此 ``constant drift,sink1 `` 的延迟较大。在运行一段时间后，由于进行时间同步，其延迟降低且受到限制。其中，随机漂移情况下的延迟波动大于恒定漂移情况下的延迟波动，但这两种情况都有延迟 \
+在仿真开始时，由于时钟之间的漂移率差异且尚未进行时间同步，因此 ``constant drift,sink1`` 的延迟较大。在运行一段时间后，由于进行时间同步，其延迟降低且受到限制。其中，随机漂移情况下的延迟波动大于恒定漂移情况下的延迟波动，但这两种情况都有延迟 \
 处于基线水平的情况。
 
 .. note::
