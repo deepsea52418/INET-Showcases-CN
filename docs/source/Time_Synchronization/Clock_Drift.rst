@@ -74,7 +74,7 @@ Source files location:
 在 ``General`` 配置中， ``source1`` 被配置为向 ``sink1`` 发送UDP数据包，而 ``source2`` 则向 ``sink2`` 发送。
 
 .. note::
-   为了展示时钟漂移对网络流量的影响，我们在 ``switch1`` 中配置TAS机制，使其每10μs交替转发来自source1和source1的帧。这不会影响后文中的仿真结果，但是时钟漂移会影响报文的端到端延迟。有关此配置部分的更多详细信息，请参阅 `该部分 <>`__ 。
+   为了展示时钟漂移对网络流量的影响，我们在 ``switch1`` 中配置TAS机制，使其每10μs交替转发来自source1和source1的帧。这不会影响后文中的仿真结果，但是时钟漂移会影响报文的端到端延迟。有关此配置部分的更多详细信息，请参阅 `该部分 <https://inet-showcases-cn.readthedocs.io/zh-cn/latest/Time_Synchronization/Clock_Drift.html#id13>`__ 。
 
 在接下来的几个部分中，我们展示了上述的示例。在具有恒定时钟漂移的仿真中， ``switch1`` 始终具有相同的时钟漂移率。在随机漂移的仿真中，\
 使用相同的漂移率，但实际的漂移率在不同的配置之间可能会有所不同。在具有时钟同步的配置中，主机被同步到 ``switch1`` 的时间。\
@@ -87,7 +87,7 @@ Source files location:
 
 由于没有配置本地时钟，所以相关配置为空
 
-.. code:: cpp
+.. code:: ini
 
    [Config NoClockDrift]
    description = "Without clocks, network nodes are synchronized by simulation time"
@@ -97,7 +97,7 @@ Source files location:
 
 在此配置中，网络中所有节点都有一个具有恒定漂移速率的本地时钟。时钟随着时间的推移逐渐漂移。
 
-.. code:: cpp
+.. code:: ini
 
    [Config ConstantClockDrift]
    description = "Clocks with constant drift rate diverge over time"
@@ -136,7 +136,7 @@ Source files location:
 
 带外同步设置在基本配置 ``OutOfBandSyncBase`` 中定义，我们可以扩展它
 
-.. code:: cpp
+.. code:: ini
 
    [Config OutOfBandSyncBase]
    description = "Base config for out-of-band synchronization"
@@ -160,7 +160,7 @@ Source files location:
 
 对于 ``ConstantClockDriftOutOfBandSync`` 示例，此示例集成了 ``ConstantClockDrift`` 示例和 ``OutOfBandSyncBase`` 示例，不需要额外的配置。
 
-.. code:: cpp
+.. code:: ini
 
    [Config ConstantClockDriftOutOfBandSync]
    description = "Clocks are periodically synchronized out-of-band, without a real protocol. Clocks use constant drift oscillators."
@@ -187,7 +187,7 @@ Source files location:
 在此配置中，本地时钟使用随机时钟漂移振荡器 `RandomDriftOscillator <https://doc.omnetpp.org/inet/api-current/neddoc/inet.clock.oscillator.RandomDriftOscillator.html>`__ 模块。 \
 指定随机时钟漂移振荡器的漂移范围和漂移间隔，使本地时钟时间随机偏移。以下是配置信息：
 
-.. code:: cpp
+.. code:: ini
 
    [Config RandomClockDrift]
    description = "Clocks with random drift rate"
@@ -217,7 +217,7 @@ Source files location:
 
 对于 ``RandomClockDriftOutOfBandSync`` 示例，此示例集成了 ``RandomClockDrift`` 示例和 ``OutOfBandSyncBase`` 示例，不需要额外的配置。
 
-.. code:: cpp
+.. code:: ini
 
    [Config RandomClockDriftOutOfBandSync]
    description = "Clocks are periodically synchronized out-of-band, without a real protocol. Clocks use random drift oscillators."
@@ -242,7 +242,7 @@ switch1的时钟一直在漂移，但 ``source1`` 和 ``source2`` 的本地时�
 
 在此配置中，网络节点的时钟漂移率与前两种配置相同，但它们会定期使用通用精确时间协议（gPTP）与主时钟进行同步。该协议测量各个链路的延迟，并通过生成树在网络上传播主时钟的时间。
 
-.. code:: cpp
+.. code:: ini
 
    [Config RandomClockDriftGptpSync]
    description = "Clocks are periodically synchronized using gPTP"
@@ -309,41 +309,33 @@ switch1的时钟一直在漂移，但 ``source1`` 和 ``source2`` 的本地时�
 .. note::
    -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationClockTimeError`` 参数配置为0时，同步时间与参考时间完全一致。
    -  当将 `SimpleClockSynchronizer <https://doc.omnetpp.org/inet/api-current/neddoc/inet.applications.clock.SimpleClockSynchronizer.html>`__ 模块的 ``synchronizationOscillatorCompensationError`` 参数配置为0时，补偿的时钟漂移率与参考时间完全匹配。否则，误差可以用PPM指定。
-   -  使用任何同步方法时，时钟之间的时钟时间差非常小，大约为微秒级别。
+   -  在进行时钟同步时，时钟之间的时间差异非常小，大约为微秒级别。
 
 时钟漂移对端到端延迟的影响
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本节旨在展示时钟漂移对网络操作的深远影响。我们通过四个示例来观察端到端延迟，以展示这种影响。
+本节旨在展示时钟漂移对流量传输的影响。我们通过四个示例来观察端到端延迟，以观测这种影响。
 
-为了达到这个目的，在所有的模拟中， ``switch1`` 中的以太网MAC层被配置为每10微秒交替转发来自 ``source1`` 和 ``source2`` 
-的数据包；请注意，UDP应用程序每20微秒发送一个数据包，其中 ``source2`` 
-的数据包与 ``source1`` 相比偏移了10微秒。因此，来自两个源的数据包在
-``switch1`` 中有一个发送窗口，并且源会根据该发送窗口生成和发送数据包到
-``switch1`` （只有当节点中的时钟同步时，它们才会同步，我们稍后会看到）。
+为了达到这个目的，在所有的模拟中， ``switch1`` 中的以太网MAC层被配置为每10微秒交替转发来自 ``source1`` 和 ``source2`` 的数据包；UDP应用程序每20微秒发送一个数据包，其中 ``source2`` \
+的数据包与 ``source1`` 相比偏移了10微秒。因此，当 ``source1`` 和 ``source2`` 的时间与 ``switch1`` 的时间完全同步时，刚好可以在指定的时隙窗口中完成传输。
 
-这是我们的配置方式。我们在 ``switch1``
-中配置EthernetMacLayer，包含一个GatingPriorityQueue，其中有两个内部队列：
+在此配置中，我们在 ``switch1``的EthernetMacLayer模块中配置了一个GatingPriorityQueue模块，其内部包含两个队列：
 
-.. code:: cpp
+.. code:: ini
 
    *.switch1.eth[0].macLayer.queue.typename = "GatingPriorityQueue"
    *.switch1.eth[0].macLayer.queue.numQueues = 2
 
-GatingPriorityQueue中的内部队列都有自己的门。这些门连接到一个PriorityScheduler，因此门控优先队列会优先处理来自第一个内部队列的数据包。这是一个具有两个内部队列的门控优先队列。
+GatingPriorityQueue中的内部队列都有自己的门，这些门连接到一个PriorityScheduler。在同一时刻，该模块会选择可以传输的队列（即开门的队列）中优先级最高的队列进行传输。
 
 .. image:: Pic/GatingPriorityQueue.png
    :alt: GatingPriorityQueue.png
    :align: center
 
-在我们的情况下，我们配置分类器（设置为ContentBasedClassifier）将来自
-``source1``
-的数据包发送到第一个队列，将来自source2的数据包发送到第二个队列，因此，门控优先队列优先处理
-``source1``
-的数据包。门的配置是每10微秒打开和关闭一次，第二个门的偏移量为10微秒周期（它们交替打开）。此外，我们通过将两个门的计划与流量生成对齐，将两个门的计划与3.118微秒的偏移量进行偏移，这是一个数据包从源到
-``switch1`` 传输所需的时间。以下是其余的门控优先队列配置：
+在此配置中，我们配置分类器（使用ContentBasedClassifier）将来自 ``source1`` 的数据包发送到第一个队列，将来自 ``source2`` 的数据包发送到第二个队列。因此，门控优先队列优先处理 ``source1`` 的数据包。 \
+配置每个门每10μs交替开关。此外，为了将两个门的开关时间与流量到达时间对齐，两个门开关时间需要有3.118μs的偏移。这是一个数据包从源节点到 ``switch1`` 传输所需的时间。以下是TAS相关配置：
 
-::
+.. code:: ini
 
    *.switch1.eth[0].macLayer.queue.classifier.typename = "ContentBasedClassifier"
    *.switch1.eth[0].macLayer.queue.classifier.packetFilters = ["source1*", "source2*"]
@@ -353,10 +345,9 @@ GatingPriorityQueue中的内部队列都有自己的门。这些门连接到一�
    *.switch1.eth[0].macLayer.queue.gate[0].offset = 3.118us
    *.switch1.eth[0].macLayer.queue.gate[1].offset = 13.118us
 
-如前所述，源中的流量应用程序每20微秒生成一个数据包，与 ``source2``
-相比，偏移量为10微秒：
+以下是源节点相关配置，源节点中应用程序每20μs生成一个UDP数据包，并且 ``source2``相比 ``source1`` ，偏移10μs：
 
-.. code:: cpp
+.. code:: ini
 
    # source applications
    *.source*.numApps = 1
@@ -377,21 +368,20 @@ GatingPriorityQueue中的内部队列都有自己的门。这些门连接到一�
    *.sink*.app[*].typename = "UdpSinkApp"
    *.sink*.app[0].io.localPort = 1000
 
-请注意，只有一个数据包适合发送窗口。然而，gPTP数据包很小，并且在与数据包相同的发送窗口中发送。
+注意，在一个时隙窗口中只适合一个UDP数据包传输，然而gPTP数据包很小，可以与UDP数据包在相同的时隙窗口中传输。
 
-我们测量从源应用程序到相应的接收应用程序的端到端延迟。让我们来看一下下面的结果。
-
-首先，我们来看一下带外同步的情况。在没有时钟漂移的情况下，数据包的生成与门控时间完全对齐，因此数据包总是能够找到开放的门。端到端延迟是恒定的，因为它仅取决于传输时间（没有由于关闭的门而产生的排队延迟）。这个延迟值在图表上显示为基准线：
+我们在接收端记录报文的端到端延迟。首先，在带外同步的情况，在没有时钟偏移的情况下，数据包的传输时间与门控时隙窗口完全对齐，因此数据包总是可以在开门的时间完成传输，端到端延迟是恒定的，只取决于传输时间。这个延迟在图表中显示为基准线（Baseline)。
 
 .. image:: Pic/delay_outofbandsync.png
    :alt: delay_outofbandsync.png
    :align: center
 
-在模拟开始时，由于时钟之间的漂移率差异尚未同步，常量漂移/下沉1的延迟较大。然而，在此之后，其延迟较低且有界。随机情况下的延迟波动比常量情况更大。然而，常量和随机情况下都存在延迟处于基准水平的时期。
+在仿真开始时，由于时钟之间的漂移率差异且尚未进行时间同步，因此 ``constant drift,sink1 `` 的延迟较大。在运行一段时间后，由于进行时间同步，其延迟降低且受到限制。其中，随机漂移情况下的延迟波动大于恒定漂移情况下的延迟波动，但这两种情况都有延迟 \
+处于基线水平的情况。
 
-**NOTE**
-
-流量生成和门的开闭时间不需要完全同步，数据点才能达到基线，因为门开放时间为10微秒，数据包传输需要约6.4微秒。
+.. note::
+   
+   UDP数据包到达时间与门的开关时间不需要完全同步，因为UDP数据包的传输时间约为6.4μs，而设置的时隙窗口时间为10μs。
 
 以下图表显示了相同的数据放大后的情况：
 
@@ -399,22 +389,21 @@ GatingPriorityQueue中的内部队列都有自己的门。这些门连接到一�
    :alt: delay_outofbandsync_zoomed.png
    :align: center
 
-在时钟漂移恒定的情况下，漂移速率差在第一次同步事件中得到完美补偿，因此线段完全水平。然而，我们为时间差同步指定了一个随机误差，因此这些值在每次同步事件中都会变化，每0.5毫秒一次。
+对于时钟漂移恒定的情况，漂移速率差在第一次同步事件中得到完美补偿，因此线段完全水平。然而，我们为时间差同步指定了一个随机误差，因此这些值在每次同步事件中都会变化，每0.5毫秒一次。
 
 对于随机时钟漂移的情况，每次同步事件都可以无误地补偿漂移率，但是时钟的漂移率在同步事件之间仍然随机变化。这导致延迟出现波动。
 
-让我们看看使用随机时钟漂移率振荡器的情况下，使用gPTP的案例
+ 下图为在随机时钟漂移情况下，使用gPTP的结果
 
 .. image:: Pic/delay_gptp.png
    :alt: delay_gptp.png
    :align: center
 
-延迟分布类似于带外同步情况，但存在异常值。gPTP需要通过网络发送数据包进行时间同步，而不是使用带外机制。这些gPTP消息有时会导致
-``source1`` 的数据包延迟，使其在队列中等待。
+延迟分布类似于带外同步情况，但存在异常值。gPTP需要通过网络发送数据包进行时间同步，而不是使用带外机制。这些gPTP消息有时会导致 ``source1`` 的数据包延迟，使其在队列中排队等待。
 
-**NOTE**
-
-通过优先处理gPTP数据包而不是源应用程序数据包，可以消除异常值。理想情况下，它们也可以在门控时间表中分配时间。
+.. note::
+   
+   通过优先处理gPTP数据包而不是UDP数据包，可以消除异常值。理想情况下，它们也可以在门控列表中分配时间。
 
 以下图表显示了带外同步和gPTP，以便进行比较
 
@@ -422,9 +411,8 @@ GatingPriorityQueue中的内部队列都有自己的门。这些门连接到一�
    :alt: delay_outofbandsync_gptp.png
    :align: center
 
-在所有这些情况下，应用程序与队列中的门的打开同步发送数据包。在没有时钟漂移的情况下，延迟仅取决于比特率和数据包长度。在
-``OutOfBandSynchronization`` 和 ``GptpSynchronization``
-的情况下，时钟会漂移，但漂移会周期性地通过同步消除，因此延迟保持有界。
+在所有这些情况下，应用程序与队列中的门的打开同步发送数据包。在没有时钟漂移的情况下，延迟仅取决于比特率和数据包长度。在 ``OutOfBandSynchronization`` 和 ``GptpSynchronization`` 的情况下，时钟会漂移， \
+但漂移会周期性地通过同步消除，因此延迟保持有界。
 
 让我们看看在没有同步的情况下延迟会发生什么：
 
@@ -432,31 +420,25 @@ GatingPriorityQueue中的内部队列都有自己的门。这些门连接到一�
    :alt: delay_constant.png
    :align: center
 
-延迟与其他情况相比，变化很大。
+延迟与其他情况相比，变化很大。这些图表背后的原因是什么？当没有时钟漂移（或通过同步机制同步）时，端到端延迟是有界的。因为由源节点发出的数据包可以在交换机中对应的时隙窗口传输。 \
+在时钟漂移率恒定的情况下，数据包的延迟取决于时钟之间的漂移大小与方向。
 
-这些图表背后的原因是什么？当没有时钟漂移（或通过同步消除时），端到端延迟是有界的，因为数据包在源端与
-``switch1``
-（发送窗口）中相应门的打开同步生成。在时钟漂移恒定的情况下，延迟的特性取决于时钟之间漂移的大小和方向。
+将恒定漂移率视为时间膨胀可能会有所帮助。 在理想条件下（无时钟漂移或消除时钟漂移），所有三个模块中的时钟保持相同时间，因此不存在时间差异。两个源中的数据包都是与时隙窗口同步 \
+的，即他们到底交换机后立即转发。在时钟漂移恒定的情况下，从switch1的角度来看，source1的时钟比自己慢，而source2的时钟比自己快。因此，由于时间偏差，来自source1 \
+的数据包流比理想情况更稀疏，而来自source2的数据包流更密集。
 
-可能有助于将恒定漂移速率视为时间膨胀。在理想条件下（没有时钟漂移或消除时钟漂移），所有三个模块中的时钟保持相同的时间，因此没有时间膨胀。两个源中的数据包与发送窗口（对应门打开时）同步生成，并立即由
-``switch1`` 转发。在恒定时钟漂移的情况下，从 ``switch1`` 的角度来看，
-``source1`` 的时钟比自己慢， ``source2``
-的时钟比自己快。因此，由于时间膨胀，来自 ``source1``
-的数据流比理想情况下稀疏，来自 ``source2`` 的数据流比理想情况下密集。
+如果数据包流较稀疏（橙色图），则在给定时间内发送的数据包平均少于发送窗口的数量，因此数据包不会在队列中累积。然而，由于时钟漂移，数据包生成和发送窗口不再同步，而是不断变化。 \
+有时，当相应的门关闭时，数据包到达switch1中的队列，因此必须等待下一次开门。对于后续数据包来说，下一次开门发生得越来越早（由于两个时钟中漂移的相对方向），因此数据包在队列中 \
+等待的时间越来越少，因此曲线的下降部分。 然后曲线变成水平的，这意味着数据包在门打开时到达并且可以立即发送。 一段时间后，与数据包生成时间相比，门打开再次发生变化，因此数据包 \
+在门关闭后才到达，并且它们必须在队列中等待下个周期才能发送。
 
-如果数据包流较稀疏（橙色图表），在一定时间内发送窗口的数量平均少于要发送的数据包数量，因此数据包不会在队列中积累。然而，由于时钟漂移，数据包生成和发送窗口不再同步，而是不断变化。有时，当相应的门关闭时，数据包到达队列，因此必须等待下一次开放。对于后续数据包，下一次开放时间越来越早（由于两个时钟漂移的相对方向），因此数据包在队列中等待的时间越来越短，因此曲线逐渐下降。然后曲线变平，表示数据包在门打开时到达，可以立即发送。一段时间后，与数据包生成相比，门的开放时间再次发生变化，因此数据包在门关闭后才到达，并且必须在队列中等待一个完整的周期才能发送。
+如果数据包流较密集（蓝色图），则平均要发送的数据包数量多于给定时间内的发送窗口数量，因此数据包最终会在队列中累积。这会导致延迟无限期地增加。
 
-如果数据包流更密集（蓝色图表），平均而言，在一定时间内要发送的数据包数量多于发送窗口的数量，因此数据包最终会在队列中积累。这会导致延迟无限增加。
+.. note::
+   -  如果数据包的传输在门关闭之前无法完成，数据包将不会被 ``switch1`` 转发（一个数据包需要6.4微秒传输，门开放时间为10微秒）。【隐式保护带】
+   -  橙色图表的水平部分的长度等于两个时钟在 ``txWindow - txDuration`` 期间漂移的量。在橙色图表的情况下，它是 ``(10μs - 6.4μs) / 700ppm ~= 5ms`` 。
 
-**NOTE**
-
--  如果传输在门关闭之前无法完成，数据包将不会被 ``switch1``
-   转发（一个数据包需要6.4微秒传输，门开放时间为10微秒）。
--  橙色图表的水平部分的长度等于两个时钟在 ``txWindow - txDuration``
-   期间漂移的量。在橙色图表的情况下，它是
-   ``(10μs - 6.4μs) / 700ppm ~= 5ms`` 。
-
-因此，如果不消除恒定的时钟漂移，网络将无法保证数据包的有界延迟。恒定的时钟漂移具有可预测的重复模式，但它仍然对延迟产生巨大影响。
+因此，如果不消除恒定的时钟漂移，网络将无法保证数据包的有界延迟。虽然恒定的时钟漂移具有可预测的重复模式，但它仍然对延迟产生巨大影响。
 
 让我们来考虑随机时钟漂移的情况：
 
@@ -464,23 +446,19 @@ GatingPriorityQueue中的内部队列都有自己的门。这些门连接到一�
    :alt: delay_random-1708854847415-27.png
    :align: center
 
-不可预测的随机时钟漂移可能对延迟产生更大的影响。
-
-以下图表比较了恒定和随机时钟漂移率的情况：
+不可预测的随机时钟漂移可能对延迟产生更大的影响。以下图表比较了恒定和随机时钟漂移率的情况：
 
 .. image:: Pic/delay_constant_random.png
    :alt: delay_constant_randompng
    :align: center
 
-相似情节中的时钟（如恒定漂移/下沉1和随机漂移/下沉2）以相同的方向漂移。
+类似图中的时钟（例如 ``constant drift/sink1`` 和 ``random drift/sink2`` ）沿相同方向漂移。
 
-Sources:
-```omnetpp.ini`` <https://inet.omnetpp.org/docs/_downloads/f6a3b3e3373e0ae31ff113560db75a12/omnetpp.ini>`__,
-```ClockDriftShowcase.ned`` <https://inet.omnetpp.org/docs/_downloads/9e1530aa23323cc6487c22f18b12760e/ClockDriftShowcase.ned>`__
+| 源代码：
+|  `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/f6a3b3e3373e0ae31ff113560db75a12/omnetpp.ini>`__ 
+|  `ClockDriftShowcase.ned <https://inet.omnetpp.org/docs/_downloads/9e1530aa23323cc6487c22f18b12760e/ClockDriftShowcase.ned>`__
 
-Discussion
+
+讨论
 ----------
-
-Use `this <https://github.com/inet-framework/inet/discussions/797>`__
-page in the GitHub issue tracker for commenting on this showcase.
-请在GitHub问题跟踪器上使用此页面对此展示进行评论。
+如果您对这个示例有任何疑问或讨论，请在 `此页面 <https://github.com/inet-framework/inet/discussions/797>`__ 分享您的想法。
