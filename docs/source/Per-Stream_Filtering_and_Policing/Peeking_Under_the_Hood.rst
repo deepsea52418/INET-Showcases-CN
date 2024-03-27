@@ -1,2 +1,83 @@
 Peeking_Under_the_Hood
 ===================
+
+| `原文链接 <https://inet.omnetpp.org/docs/showcases/tsn/streamfiltering/tokenbucket/doc/index.html>`__ 
+
+目标
+~~~~~
+
+该展示演示了过滤和监管模块可以在网络节点的上下文之外工作。 这样做可能有助于组装和验证特定的复杂过滤和监管行为，而这些行为很难在完整的网络中复制。
+
+
+INET version: ``4.4``
+
+源地址链接:
+`inet/showcases/tsn/streamfiltering/underthehood <https://github.com/inet-framework/inet/tree/master/showcases/tsn/streamfiltering/underthehood>`__
+
+
+模型
+~~~~~~~~~
+
+在此配置中，我们直接将流过滤模块连接到多个数据包源。
+
+下面是网络
+
+.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/31.png
+   :alt: 模型1.png
+   :align: center
+
+下面是配置
+
+.. code:: ini
+   [General]
+   network = PeekingUnderTheHoodShowcase
+   sim-time-limit = 1s
+   description = "Per-stream filtering several packet sources with sinusoidally changing datarate"
+
+   *.numSources = 3
+   *.sources[*].packetLength = 100B
+   *.sources[0].productionInterval = replaceUnit(sin(dropUnit(simTime() * 1)) + sin(dropUnit(simTime() * 8)) + 10, "ms") / 100
+   *.sources[1].productionInterval = replaceUnit(sin(dropUnit(simTime() * 2)) + 1.5, "ms") / 10
+   *.sources[2].productionInterval = replaceUnit(sin(dropUnit(simTime() * 3)) + 1.5, "ms") / 10
+
+   *.identifier.mapping = [{packetFilter: "sources[0]*", stream: "s0"},
+                        {packetFilter: "sources[1]*", stream: "s1"},
+                        {packetFilter: "sources[2]*", stream: "s2"}]
+
+   *.filter.typename = "SimpleIeee8021qFilter"
+   *.filter.numStreams = 3
+   *.filter.classifier.mapping = {s0: 0, s1: 1, s2: 2}
+
+   **.initialNumTokens = 0
+   *.filter.meter[*].typename = "SingleRateTwoColorMeter"
+   *.filter.meter[*].committedInformationRate = 8Mbps
+   *.filter.meter[*].committedBurstSize = 100kB
+
+    
+结果
+~~~~~
+
+下面是结果
+
+
+.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/32.png
+   :alt: 图2.png
+   :align: center
+
+.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/33.png
+   :alt: 图3.png
+   :align: center
+
+.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/34.png
+   :alt: 图4.png
+   :align: center
+
+
+
+| 源代码：
+|  `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/65356755db975f6bb9efee6562c9d74a/omnetpp.ini>`__ 
+   `PeekingUnderTheHoodShowcase.ned <https://inet.omnetpp.org/docs/_downloads/95a5f7108069c83ee33d9fce6f6f74cd/PeekingUnderTheHoodShowcase.ned>`__
+
+讨论
+----------
+如果您对这个示例有任何疑问或讨论，请在 `此页面 <https://github.com/inet-framework/inet/discussions/796>`__ 分享您的想法。
