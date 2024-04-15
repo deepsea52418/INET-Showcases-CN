@@ -18,10 +18,10 @@ INET version: ``4.5``
 模型
 ~~~~~~~~~
 
-在下面的网络中有三个网络节点，client与server是TsnDevice模块，swith是TsnSwitch模块，他们之间的链接使用100Mbps EthernetLink通道
+在下面的网络中有三个网络节点,client与server是TsnDevice模块,swith是TsnSwitch模块,他们之间的链接使用100Mbps EthernetLink通道
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/令牌桶/1.png
-   :alt: 模型1.png
+.. image:: Pic/TBP/TsnLinearNetwork.png
+   :alt: TsnLinearNetwork
    :align: center
 
 网络中有四个应用程序在客户端和服务器之间创建两个独立的数据流。 数据速率随着正弦曲线变化，平均数据速率为40 Mbps和20 Mbps。
@@ -102,32 +102,32 @@ INET version: ``4.5``
 
 第一个图显示了客户端中应用级输出流量的数据速率。两种传输类别的数据速率都随着正弦曲线变化。
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/令牌桶/2.png
-   :alt: 图2.png
+.. image:: Pic/TBP/Client_application_traffic.png
+   :alt: Client application traffic
    :align: center
 
 下图显示了尽力而为流量类别的流过滤操作。 传出数据速率等于传入的数据速率减去丢弃的数据速率。
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/令牌桶/3.png
-   :alt: 图3.png
+.. image:: Pic/TBP/Best_effort_traffic_class.png
+   :alt: Best effort traffic class
    :align: center
 
 下图显示了视频流类别的流过滤的操作。 传出数据速率等于传入的数据速率减去丢弃的数据速率。
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/令牌桶/4.png
-   :alt: 图4.png
+.. image:: Pic/TBP/Video_traffic_class.png
+   :alt: Video traffic class
    :align: center
 
 下图显示了两个流的令牌桶中的令牌数量。 填充区域意味着令牌数量随着数据包通过而快速变化。 当线路接近最小值时，数据速率达到最大值。
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/令牌桶/5.png
-   :alt: 图5.png
+.. image:: Pic/TBP/Token_buckets.png
+   :alt: Token buckets
    :align: center
 
 最后一张图显示了服务器中应用程序级输入流量的数据速率。 数据速率稍微低于相应流过滤的输出流量的数据速率。 原因是它们是在不同的协议层测量的。
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/令牌桶/6.png
-   :alt: 图6.png
+.. image:: Pic/TBP/Server_application_traffic.png
+   :alt: Server application traffic
    :align: center
 
 

@@ -22,8 +22,8 @@ INET version: ``4.5``
 
 下面是网络：
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/统计监管/1.png
-   :alt: 模型1.png
+.. image:: Pic/SP/TsnLinearNetwork.png
+   :alt: TsnLinearNetwork
    :align: center
 
 下面是配置
@@ -98,21 +98,21 @@ INET version: ``4.5``
 
 下面是结果
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/统计监管/2.png
-   :alt: 图2.png
+.. image:: Pic/SP/Client_application_traffic.png
+   :alt: Client application traffic
    :align: center
 
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/统计监管/3.png
-   :alt: 图3.png
+.. image:: Pic/SP/Best_effort_traffic_class.png
+   :alt: Best effort traffic class
    :align: center
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/统计监管/4.png
-   :alt: 图4.png
+.. image:: Pic/SP/Video_traffic_class.png
+   :alt: Video traffic class
    :align: center
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/统计监管/5.png
-   :alt: 图5.png
+.. image:: Pic/SP/Server_application_traffic.png
+   :alt: Server application traffic
    :align: center
 
 | 源代码：

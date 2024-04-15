@@ -22,8 +22,8 @@ INET version: ``4.4``
 
 下面是网络
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/31.png
-   :alt: 模型1.png
+.. image:: Pic/PUH/PeekingUnderTheHoodShowcase.png
+   :alt: PeekingUnderTheHoodShowcase
    :align: center
 
 下面是配置
@@ -60,16 +60,16 @@ INET version: ``4.4``
 下面是结果
 
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/32.png
-   :alt: 图2.png
+.. image:: Pic/PUH/Traffic_class_1.png
+   :alt: Traffic class 1
    :align: center
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/33.png
-   :alt: 图3.png
+.. image:: Pic/PUH/Traffic_class_2.png
+   :alt: Traffic class 2
    :align: center
 
-.. image:: C:/Users/yaanng2019/Desktop/INET/UnderHood/34.png
-   :alt: 图4.png
+.. image:: Pic/PUH/Traffic_class_3.png
+   :alt: Traffic class 3
    :align: center
 
 
