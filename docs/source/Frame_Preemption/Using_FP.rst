@@ -17,7 +17,7 @@
 概览
 ~~~~
 
-在时间敏感的网络应用中，以太网抢占可以显著降低延迟。 当高优先级帧在传输低优先级帧期间可用于传输时， 以太网MAC可以中断低优先级帧的传输，并开始发送高优先级帧。当高优先级帧完成时，MAC 可以继续从中断的位置传输低优先级帧，最终发送低优先级帧在两个（或更多）片段中帧。
+在时间敏感的网络应用中，以太网抢占可以显著降低延迟。 当低优先级数据传输，高优先级帧的可进行传输的时候， 以太网MAC可以中断低优先级帧的传输，并开始发送高优先级帧。当高优先级帧完成时，MAC 可以继续从中断的位置传输低优先级帧，最终发送低优先级帧在两个（或更多）片段中帧。
 
 抢占是INET组合以太网模型的一个特性。它使用INET的数据包流API，因此数据包传输表示为可中断的流。抢占需要:ned:`LayeredEthernetInterface`，它包含一个MAC层和一个PHY层，如下图所示：
 
@@ -26,12 +26,14 @@
 
 要启用抢占，需要用 :ned:`EthernetPreemptingMacLayer` 和 :ned:`EthernetPreemptingPhyLayer` 替换默认的子模块 :ned:`EthernetMacLayer` 和 :ned:`EthernetPhyLayer`。
 
-:ned:`EthernetPreemptingMacLayer` 包含两个子模块，这两个子模块本身代表以太网
-MAC层，一个是可抢占的（:ned:`EthernetFragmentingMacLayer`）和一个快速MAC层
-（:ned:`EthernetStreamingMacLayer`），每个都有自己的帧队列：
+:ned:`EthernetPreemptingMacLayer` 包含两个子模块，这两个子模块本身代表以太网MAC层，一个是可抢占的（:ned:`EthernetFragmentingMacLayer`）和一个快速MAC层（:ned:`EthernetStreamingMacLayer`），每个都有自己的帧队列：
 
 .. figure:: media/mac.png
    :align: center
+
+
+2024。4.26校对书签
+
 
 :ned:`EthernetPreemptingMacLayer` 使用节点内数据包流。离散数据包
 从高层进入MAC模块，但离开子MAC层（快速和可抢占）时
