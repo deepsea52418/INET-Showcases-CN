@@ -31,37 +31,25 @@
 .. figure:: media/mac.png
    :align: center
 
+:ned:`EthernetPreemptingMacLayer` 使用节点内数据包流。离散数据包从高层进入MAC模块，但离开子MAC层（快速和可抢占）时作为数据包流。数据包以流的形式离开MAC层，并以此种形式通过PHY层和链路。
 
-2024。4.26校对书签
-
-
-:ned:`EthernetPreemptingMacLayer` 使用节点内数据包流。离散数据包
-从高层进入MAC模块，但离开子MAC层（快速和可抢占）时
-作为数据包流。数据包以流的形式离开MAC层，并通过
-PHY层和链接以此种形式表示。
-
-在抢占的情况下，数据包最初从可抢占的子MAC层流出。
-当快速MAC接收到数据包时，``scheduler`` 会通知 ``preemptingServer``。
-``preemptingServer`` 停止可抢占流，发送完整的快速流，
-然后最终恢复可抢占流。
+在抢占的情况下，数据包最初从可抢占的子MAC层流出。当快速MAC接收到数据包时，``scheduler`` 会通知 ``preemptingServer``。``preemptingServer`` 停止可抢占流，发送完整的快速流，然后最终恢复可抢占流。
 
 PHY层插入帧间隙。
 
-.. **待办事项** `其他地方？` 注意，任何时候只能有一个帧被抢占分片。
-
-:ned:`EthernetPreempt
+``EthernetPreemptingPhyLayer`` 支持数据包流和分段 （以多个分段发送数据包）。
 
 配置
 ~~~~~~~~
 
-模拟使用以下网络：
+仿真使用下图所示的网络：
 
 .. figure:: media/network.png
    :align: center
 
 它包含两个通过100Mbps以太网连接的 :ned:`StandardHost` 和一个 :ned:`PcapRecorder` 用来记录PCAP追踪；``host1`` 定期为 ``host2`` 生成数据包。
 
-我们主要想比较端到端延迟，因此我们在以下三种配置中运行模拟，使用相同数据包长度的低优先级和高优先级流量：
+我们主要想比较端到端延迟，因此我们在以下三种配置中运行仿真，使用相同数据包长度的低优先级和高优先级流量：
 
 - ``FifoQueueing``: 基线配置；不使用优先级队列或抢占。
 - ``PriorityQueueing``: 在以太网MAC中使用优先级队列，以降低高优先级帧的延迟。
@@ -69,12 +57,7 @@ PHY层插入帧间隙。
 
 此外，我们展示了使用更真实的流量：长时间且频繁的低优先级帧与短暂、不频繁的高优先级帧的优先队列和抢占。这些模拟是上述三种配置的扩展，定义在 ini 文件中，以 ``Realistic`` 前缀命名。
 
-在``General``配置中，主机被配置为使用分层以太网模型而不是默认模型，必须禁用：
-
-.. literalinclude:: ../omnetpp.ini
-   :start-at: encap.typename
-   :end-at: LayeredEthernetInterface
-   :language: ini
+在配置中，主机配置为使用分层以太网模型 而不是必须禁用的默认值： ``General``
 
 我们还想记录PCAP追踪，以便在Wireshark中检查流量。我们启用PCAP记录，并设置PCAP记录器来转储以太网PHY帧，因为抢占在PHY头中是可见的：
 
@@ -92,7 +75,7 @@ PHY层插入帧间隙。
 
 在``host1``中有两个 :ned:`UdpApp`，一个生成背景流量（低优先级）另一个生成高优先级流量。UDP应用为数据包加上VLAN标签，以太网MAC使用标签中的VLAN ID来分类流量为高低优先级。
 
-我们设置了高比特率的背景流量（96 Mbps）和较低比特率的高优先级流量（9.6 Mbps）；两者都使用1200B的数据包。它们的总和故意高于100 Mbps链路容量（我们希望队列不为空）；超额的数据包将被丢弃。
+我们设置了高比特率的背景流量（96 Mbps）和较低比特率的高优先级流量（9.6 Mbps）；两者都使用1200B的数据包。它们的总和故意高于100 Mbps的链路容量（我们希望队列不为空）；超出容量的数据包将被丢弃。
 
 .. literalinclude:: ../omnetpp.ini
    :start-at: app[0].source.packetLength
@@ -137,7 +120,7 @@ PHY层插入帧间隙。
 
 在这个流量配置中，高优先级数据包的频率是低优先级数据包的100倍，大小是低优先级数据包的1/10。
 
-传输线上
+传输
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 为了理解在OMNeT++ GUI中帧抢占是如何表示的（在Qtenv的动画和数据包日志中，以及在IDE的序列图中），必须了解数据包传输在OMNeT++中是如何建模的。
