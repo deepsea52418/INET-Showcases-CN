@@ -8,7 +8,7 @@
 
 在此演示的示例中，我们将演示时间同步如何影响使用时间感知流量整形的网络中的端到端时延。
 
-此示例建立在`时钟漂移 <https://inet.omnetpp.org/docs/showcases/tsn/timesynchronization/clockdrift/doc/index.html>`__、`使用 gPTP <https://inet.omnetpp.org/docs/showcases/tsn/timesynchronization/gptp/doc/index.html>`__ 和 `时间感知整形 <https://inet.omnetpp.org/docs/showcases/tsn/trafficshaping/timeawareshaper/doc/index.html>`__的基础上。
+此示例建立在 `时钟漂移 <https://inet.omnetpp.org/docs/showcases/tsn/timesynchronization/clockdrift/doc/index.html>`__ 、 `使用 gPTP <https://inet.omnetpp.org/docs/showcases/tsn/timesynchronization/gptp/doc/index.html>`__ 和 `时间感知整形 <https://inet.omnetpp.org/docs/showcases/tsn/trafficshaping/timeawareshaper/doc/index.html>`__ 的基础上。
 
 INET version: ``4.5``
 
