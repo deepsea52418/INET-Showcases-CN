@@ -43,7 +43,8 @@ INET Showcases CN
   + 2024.03.08 创建网页
 + **组合功能**  
   
-  + 
+  + `dkmahao <https://github.com/dkmahao>`_ 
+  + 2024.06.14 创建网页，完善【时间同步对TAS整形的影响】部分
 
 
 
