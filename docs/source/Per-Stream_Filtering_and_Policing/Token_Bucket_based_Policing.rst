@@ -6,7 +6,7 @@
 目标
 ~~~~~
 
-在此示例中，我们使用链式令牌桶演示每个流的监管，该令牌桶允许指定规定的或过量的信息速率和突发尺寸。
+在此示例中，我们演示了使用令牌桶进行每个流的监管，其允许指定数据包的最大带宽以及突发大小。
 
 
 INET version: ``4.5``
@@ -18,13 +18,13 @@ INET version: ``4.5``
 模型
 ~~~~~~~~~
 
-在下面的网络中有三个网络节点,client与server是TsnDevice模块,swith是TsnSwitch模块,他们之间的链接使用100Mbps EthernetLink通道
+在下面的网络中有三个网络节点，客户端和服务器为TsnDevice模块，交换机为TsnSwitch模块，它们之间的链路采用100Mbps以太网链路。
 
 .. image:: Pic/TBP/TsnLinearNetwork.png
    :alt: TsnLinearNetwork
    :align: center
 
-网络中有四个应用程序在客户端和服务器之间创建两个独立的数据流。 数据速率随着正弦曲线变化，平均数据速率为40 Mbps和20 Mbps。
+网络中有四个应用程序，在客户端和服务器之间创建两个独立的数据流。平均数据速率分别为 40 Mbps 和 20 Mbps，但数据包间隔时间采用正弦曲线。
 
 .. code:: ini
    # client applications
@@ -52,7 +52,7 @@ INET version: ``4.5``
    
 
 
-这两个流有两个不同的流量类别：尽力而为和视频流。 桥接层通过 UDP 目标端口识别传出数据包。 客户端编码和开关使用IEEE 802.1Q PCP字段解码流。
+这两个流具有两种不同的流量类别：尽力而为和视频流。传输层通过 UDP 目标端口识别传出的数据包。客户端使用 IEEE 802.1Q PCP 字段对流进行编码，交换机则对流进行解码。
 
 .. code:: ini
 
@@ -75,7 +75,7 @@ INET version: ``4.5``
                                                  {pcp: 4, stream: "video"}]
 
 
-每个流的入口过滤将不同的流量类别分派到单独的计量和过滤路径。
+在交换机入口处，过滤器根据PCP信息的不同，将不同的流送至不同的路径传输。
 
 .. code:: ini
    # enable ingress per-stream filtering
@@ -87,7 +87,7 @@ INET version: ``4.5``
    *.switch.bridging.streamFilter.ingress.meter[0].display-name = "best effort"
    *.switch.bridging.streamFilter.ingress.meter[1].display-name = "video"
 
-对两个流都使用单速率双色计量。 该计量器包含单个令牌桶并具有两个参数：承诺信息速率和承诺突发大小。 数据包被标记为绿色或红色，红色数据包被过滤器丢弃。
+我们对两种流使用单速率双色过滤器。该过滤器包含一个令牌桶，有两个参数：允许最大流速率和允许流突发大小。该过滤器将数据包标记为绿色或红色，过滤器会丢弃红色数据包。
 
 .. code:: ini
    *.switch.bridging.streamFilter.ingress.meter[*].typename = "SingleRateTwoColorMeter"
