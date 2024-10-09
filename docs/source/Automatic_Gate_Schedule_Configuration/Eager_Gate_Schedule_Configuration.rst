@@ -14,7 +14,9 @@ Source files location: `inet/showcases/tsn/gatescheduling/eager <https://github.
 
 仿真网络结构如下：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706792739400-f5b0ef8b-9b35-4bd4-bfc0-5baf888e227f.png
+.. image:: pic/eager_model.png
+   :alt: eager_model.png
+   :align: center
 
 配置如下：
 
@@ -120,15 +122,21 @@ Source files location: `inet/showcases/tsn/gatescheduling/eager <https://github.
 ------
 在以下序列图中显示了1毫秒的门周期持续时间。注意从源到接收器的包流的时间效率是如何的：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706793285334-0866587a-9c2a-4620-8ecb-997946a8bfcb.png
+.. image:: pic/eager_res1.png
+   :alt: eager_res1.png
+   :align: center
 
 以下是“尽力而为”流量类中client2的第二个分组从分组源到分组sink的延迟。请注意，此流是上述图表中的异常值。虽然延迟仍在500us要求范围内，但已经非常接近：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706793435560-5041c66f-3036-4f9e-a651-ca0939adf5a2.png
+.. image:: pic/eager_res2.png
+   :alt: eager_res2.png
+   :align: center
 
 不同流量类别的报文延迟情况如下图所示：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706793482969-7a94ff4b-dbcb-476f-8da5-01f07ce0baf2.png
+.. image:: pic/eager_res3.png
+   :alt: eager_res3.png
+   :align: center
 
 所有延迟都在指定的约束范围内。
 
