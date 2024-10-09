@@ -17,7 +17,9 @@ Source files location: `inet/showcases/tsn/gatescheduling/sat <https://github.co
 
 仿真网络结构如下：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706793993779-02825efb-8f82-4e17-9ed9-c0000bfb46a4.png
+.. image:: pic/sat_model.png
+   :alt: sat_model.png
+   :align: center
 
 配置如下：
 
@@ -113,15 +115,21 @@ Source files location: `inet/showcases/tsn/gatescheduling/sat <https://github.co
 ------
 下面的序列图展示了一个持续1毫秒的门循环。请注意，相较于Eager情况，该调度门具有更高的时间效率：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706794191736-509d4493-adec-4bdd-b74b-b5ccd9160b20.png
+.. image:: pic/sat_res1.png
+   :alt: sat_res1.png
+   :align: center
 
 不同流量类别下的应用端到端时延如下图所示:
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706794282651-c869323b-92b2-43e9-94f7-a3eba3ec2c35.png
+.. image:: pic/sat_res2.png
+   :alt: sat_res2.png
+   :align: center
 
 每个分组的延迟是恒定且不超过500微秒。需要注意的是，流量延迟在不同源和目标组合中是对称的（与紧急情况相反）。下面这个序列图摘录展示了数据包从数据包源传输到数据包目标的过程，并显示了时延：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706794368845-16574fae-fb5f-4abd-af77-c6915582b9b1.png
+.. image:: pic/sat_res3.png
+   :alt: sat_res3.png
+   :align: center
 
 要计算数据包的延迟，可以使用公式：
 
@@ -139,7 +147,9 @@ Source files location: `inet/showcases/tsn/gatescheduling/sat <https://github.co
 
 下图比较了基于SAT和Eager门调度配置器在应用程序端到端延迟方面的差异：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706794493238-397aa222-d874-4af4-bd05-ce15348c928d.png
+.. image:: pic/sat_res4.png
+   :alt: sat_res4.png
+   :align: center
 
 不同之处在于，在基于SAT的门调度配置器中，给定流量类别中的所有流都具有相同的恒定延迟；而在Eager配置器中，某些流的延迟比其他流更大。
 
