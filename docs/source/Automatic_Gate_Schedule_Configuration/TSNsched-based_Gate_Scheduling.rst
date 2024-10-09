@@ -16,7 +16,9 @@ TSNschedGateScheduleConfigurator 模块提供了一个 gate 调度配置器，�
 
 模拟使用了与 Eager 和 SAT 配置器相同的网络:
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706794732693-bf16d72f-e015-48be-a826-250e419a735d.png
+.. image:: pic/sched_model.png
+   :alt: sched_model.png
+   :align: center
 
 配置如下：
 
@@ -130,15 +132,18 @@ TSNschedGateScheduleConfigurator 模块提供了一个 gate 调度配置器，�
 ------
 下面的序列图显示了一个门循环周期(1ms):
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706795147033-92b78329-4c86-449f-bcf3-835431dff49f.png
-
+.. image:: pic/sched_res1.png
+   :alt: sched_res1.png
+   :align: center
 请注意，帧是立即由交换机转发的。
 
 
 
 下面的序列图显示了帧传输，在两个交换机的轴上显示了最佳状态的门状态：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706795188923-a02df8d8-fb4f-4f2e-a4bb-9875476e3973.png
+.. image:: pic/sched_res2.png
+   :alt: sched_res2.png
+   :align: center
 
 注意，门是打开的，因此可以传输两个帧，并且帧传输和发送窗口在时间上紧密对齐。
 
@@ -146,7 +151,9 @@ TSNschedGateScheduleConfigurator 模块提供了一个 gate 调度配置器，�
 
 下图展示了这4个流的应用端到端延迟：
 
-.. image:: https://cdn.nlark.com/yuque/0/2024/png/38989677/1706795233583-8bd2938e-7498-4e50-8906-ce65ee1d8e81.png
+.. image:: pic/sched_res3.png
+   :alt: sched_res3.png
+   :align: center
 
 所有流的延迟都尽可能小，因为它们是立即转发的。
 
