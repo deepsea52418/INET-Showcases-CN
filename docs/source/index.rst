@@ -1,15 +1,16 @@
 INET Showcases CN
 ===================================
-.. raw:: html
-
-   <iframe src="https://ghbtns.com/github-btn.html?user=deepsea52418&repo=INET-Showcases-CN&type=star&count=true&size=large" 
-   frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
 
 本项目主要完成以下工作：
 
 1. INET Showcases TSN部分内容的中文翻译
 2. INET Showcases TSN部分视频讲解
 3. 个人对于各示例的理解感悟
+
+.. raw:: html
+
+   <iframe src="https://ghbtns.com/github-btn.html?user=deepsea52418&repo=INET-Showcases-CN&type=star&size=large" 
+   frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
 
 .. note::
   目前视频无法直接播放，需要右键，选择【显示所有控件】才可以播放
@@ -62,8 +63,7 @@ INET Showcases CN
   |   2024.04 完成流过滤与监管部分
   |   待定
 
-目录
--------- 
+
 .. toctree::
    :maxdepth: 1
    :glob:
