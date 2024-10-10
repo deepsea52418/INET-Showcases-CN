@@ -1,18 +1,19 @@
 基于TSNsched的自动门控配置
 ======================================================
-
+| `原文链接 <https://inet.omnetpp.org/docs/showcases/tsn/gatescheduling/tsnsched/doc/index.html>`__ 
+| `讲解视频 <https://space.bilibili.com/35942145>`__
 目标
 ------
 这个示例演示了 TSNsched gate 调度配置器，它通过外部 SAT 求解工具解决了自动配置问题。
 
-INET version: 4.5
+INET version: ``4.4``
 
 Source files location: `inet/showcases/tsn/gatescheduling/tsnsched <https://github.com/inet-framework/inet/tree/master/showcases/tsn/gatescheduling/tsnsched>`_
 
 模型
 ------
 
-TSNschedGateScheduleConfigurator 模块提供了一个 gate 调度配置器，它使用了可在 `https://github.com/ACassimiro/TSNsched <https://github.com/ACassimiro/TSNsched>`_ 上获得的 TSNsched 工具（有关安装说明，请查看 NED 文档）。该模块与其他门调度配置器具有相同的参数。
+TSNschedGateScheduleConfigurator 模块提供了一个自动门控配置器，它使用了可在 `https://github.com/ACassimiro/TSNsched <https://github.com/ACassimiro/TSNsched>`_ 上获得的 TSNsched 工具（有关安装说明，请查看 NED 文档）。该模块与其他门调度配置器具有相同的参数。
 
 模拟使用了与 Eager 和 SAT 配置器相同的网络:
 
@@ -22,7 +23,7 @@ TSNschedGateScheduleConfigurator 模块提供了一个 gate 调度配置器，�
 
 配置如下：
 
-.. code-block:: plain
+.. code:: ini
 
     [General]
     network = inet.networks.tsn.TsnDumbbellNetwork
@@ -123,10 +124,10 @@ TSNschedGateScheduleConfigurator 模块提供了一个 gate 调度配置器，�
 
 .. 注意::
 
-    与Eager和SAT配置器展示相比，由于SAT求解器工具的限制，此配置中有两个变化：
+    由于SAT求解器工具的限制，与Eager和SAT配置器示例相比，此配置中有两个变化：
 
     1. 流量密度是Eager和SAT配置器展示的一半。目前，该工具只能在所有传输在门控周期内完成的情况下找到自动配置问题的解决方案（尽管单个帧传输应该可以重叠）。
-    2. 需要在XML配置中的包大小上增加12个字节，以考虑帧间间隙。
+    2. 需要在XML配置中的包大小上增加12个字节，以考虑帧间间隙（针对此问题，可以关注一下TSNSched工具的README）。
 
 仿真结果
 ------
@@ -135,11 +136,11 @@ TSNschedGateScheduleConfigurator 模块提供了一个 gate 调度配置器，�
 .. image:: pic/sched_res1.png
    :alt: sched_res1.png
    :align: center
-请注意，帧是立即由交换机转发的。
+请注意，帧是立即由交换机转发的（即无等待）。
 
 
 
-下面的序列图显示了帧传输，在两个交换机的轴上显示了最佳状态的门状态：
+下面的序列图显示了帧传输，在两个交换机的轴上显示了BE流的门状态：
 
 .. image:: pic/sched_res2.png
    :alt: sched_res2.png

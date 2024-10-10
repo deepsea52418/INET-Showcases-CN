@@ -1,11 +1,14 @@
 快速自动门控配置
 ==============================================
 
+| `原文链接 <https://inet.omnetpp.org/docs/showcases/tsn/gatescheduling/eager/doc/index.html>`__ 
+| `讲解视频 <https://space.bilibili.com/35942145>`__
+
 目标
 ------
 这个示例演示了 EagerGateScheduleConfigurator 如何在简单网络中设置调度。
 
-INET version: 4.5
+INET version: ``4.4``
 
 Source files location: `inet/showcases/tsn/gatescheduling/eager <https://github.com/inet-framework/inet/tree/master/showcases/tsn/gatescheduling/eager>`_
 
@@ -20,7 +23,7 @@ Source files location: `inet/showcases/tsn/gatescheduling/eager <https://github.
 
 配置如下：
 
-.. code-block:: plain
+.. code:: ini
 
     [Eager]
     network = inet.networks.tsn.TsnDumbbellNetwork
@@ -126,7 +129,7 @@ Source files location: `inet/showcases/tsn/gatescheduling/eager <https://github.
    :alt: eager_res1.png
    :align: center
 
-以下是“尽力而为”流量类中client2的第二个分组从分组源到分组sink的延迟。请注意，此流是上述图表中的异常值。虽然延迟仍在500us要求范围内，但已经非常接近：
+以下是BE类流量中client2的第二个分组从分组源到分组sink的延迟。请注意，此流是上述图表中的异常值。虽然延迟仍在500us要求范围内，但已经非常接近：
 
 .. image:: pic/eager_res2.png
    :alt: eager_res2.png
@@ -142,7 +145,7 @@ Source files location: `inet/showcases/tsn/gatescheduling/eager <https://github.
 
 .. 注意::
 
-    视频流和client2 尽力而为流都存在两个聚类点。这是因为每个门周期内这些流量类别都有多个数据包。由于不同流之间的相互作用，一些分组的延迟会增加。
+    视频流和client2 尽力而为流都存在两个聚类点。这是因为每个门周期内这些流量类别都有多个数据包。由于不同流之间的相互作用，一些分组的延迟会增加。（图中看似是平行线，但实际是锯齿状折线）
 
 讨论
 ------

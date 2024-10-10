@@ -1,19 +1,22 @@
 基于SAT求解器的自动门控配置
 ====================================================================
 
+| `原文链接 <https://inet.omnetpp.org/docs/showcases/tsn/gatescheduling/sat/doc/index.html>`__ 
+| `讲解视频 <https://space.bilibili.com/35942145>`__
+
 目标
 ------
 
-这个示例演示了一个门调度配置器，使用多元线性不等式系统解决自动配置问题，直接从变量生成门控制列表。
+这个示例演示了一个门调度配置器，它使用多元线性不等式系统解决自动配置问题，直接从变量生成门控列表。
 
-INET version: 4.5
+INET version: ``4.4``
 
 Source files location: `inet/showcases/tsn/gatescheduling/sat <https://github.com/inet-framework/inet/tree/master/showcases/tsn/gatescheduling/sat>`_
 
 模型
 ------
 
-基于SAT求解器的门调度配置器需要启用Z3门调度配置器INET特性，并安装libz3-dev或Z3-devel包。
+基于SAT求解器的自动门控配置器需要启用INET的 ``Z3 Gate Scheduling Configurator`` 特性，并安装libz3-dev或Z3-devel包。
 
 仿真网络结构如下：
 
@@ -23,7 +26,7 @@ Source files location: `inet/showcases/tsn/gatescheduling/sat <https://github.co
 
 配置如下：
 
-.. code-block:: plain
+.. code:: ini
 
     # 创建一个TSN双哑铃网络
     network = inet.networks.tsn.TsnDumbbellNetwork
@@ -125,7 +128,7 @@ Source files location: `inet/showcases/tsn/gatescheduling/sat <https://github.co
    :alt: sat_res2.png
    :align: center
 
-每个分组的延迟是恒定且不超过500微秒。需要注意的是，流量延迟在不同源和目标组合中是对称的（与紧急情况相反）。下面这个序列图摘录展示了数据包从数据包源传输到数据包目标的过程，并显示了时延：
+每个分组的延迟是恒定且不超过500微秒。需要注意的是，流量延迟在不同源和目标组合中是对称的（与Eager情况相反）。下面这个序列图摘录展示了数据包从数据包源传输到数据包目标的过程，并显示了时延：
 
 .. image:: pic/sat_res3.png
    :alt: sat_res3.png
@@ -137,7 +140,7 @@ Source files location: `inet/showcases/tsn/gatescheduling/sat <https://github.co
 
     D = (传播时间 + 传输时间) * 3     （排队时间为0）
 
-给定每条链路的传输时间为84.64微秒，传播时间为0.05微秒，我们可以将这些值代入公式中计算尽力而为流量类别的延迟。
+其中数据包在链路上的传输延迟为84.64微秒，传播时间为0.05微秒，我们可以将这些值代入公式中计算尽力而为流量类别的延迟。
 
 .. math::
 

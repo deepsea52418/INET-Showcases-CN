@@ -1,11 +1,18 @@
 INET Showcases CN
 ===================================
+.. raw:: html
+
+   <iframe src="https://ghbtns.com/github-btn.html?user=deepsea52418&repo=INET-Showcases-CN&type=star&count=true&size=large" 
+   frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
 
 本项目主要完成以下工作：
 
 1. INET Showcases TSN部分内容的中文翻译
 2. INET Showcases TSN部分视频讲解
 3. 个人对于各示例的理解感悟
+
+.. note::
+  目前视频无法直接播放，需要右键，选择【显示所有控件】才可以播放
 
 更新日志 & 贡献者名单
 ---------------------
@@ -18,9 +25,8 @@ INET Showcases CN
 + **时间同步** 
   
   + `dkmahao <https://github.com/dkmahao>`_ 
-  + 2024.03.24 完善【时钟漂移】部分
-  + 2024.03.18 完善【时钟漂移】部分
-  + 2024.03.07 创建网页
+  + 1.1.0 完善【时钟漂移】部分
+  + 1.0.0 完善【时钟漂移】部分
 + **流过滤与监管**  
   
   +   
@@ -30,7 +36,9 @@ INET Showcases CN
   +   
 + **自动门控配置**  
   
-  + 
+  + `Caceny <https://github.com/Caceny>`_
+  + 1.0.1 内容润色
+  + 1.0.0 完善本章内容
 + **帧复制与消除**  
   
   +
@@ -40,11 +48,11 @@ INET Showcases CN
 + **直通交换**  
   
   + `Deepsea52418 <https://github.com/deepsea52418>`_ 
-  + 2024.03.08 创建网页
+  + 1.0.0 完善本章内容
 + **组合功能**  
   
   + `dkmahao <https://github.com/dkmahao>`_ 
-  + 2024.06.14 创建网页，完善【时间同步对TAS整形的影响】部分
+  + 1.0.0 完善【时间同步对TAS整形的影响】部分
 
 
 
@@ -54,13 +62,12 @@ INET Showcases CN
   |   2024.04 完成流过滤与监管部分
   |   待定
 
-.. note::
-  目前视频无法直接播放，需要右键，选择【显示所有控件】才可以播放
 目录
 -------- 
 .. toctree::
    :maxdepth: 1
    :glob:
+   :hidden:
 
    Time_Synchronization/index
    Per-Stream_Filtering_and_Policing/index
