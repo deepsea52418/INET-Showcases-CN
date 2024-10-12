@@ -1,5 +1,5 @@
 """
-INET-Showcases-CN - Python library for cooks and food lovers.
+INET-Showcases-CN
 """
 
 __version__ = "0.1.0"
