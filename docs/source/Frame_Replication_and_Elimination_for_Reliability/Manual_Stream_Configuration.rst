@@ -18,11 +18,13 @@ Source files location:
 在此配置中，我们采用了IEEE 802.1CB修正案中提到的网络拓扑。网络包含一个源节点和目标节点，其中源节点通过五个交换机发送冗余数据流。该流在三个交换机中复制，并在两个交换机中合并。
 
 网络如下：
+
 .. image:: Pic/Network15.png
    :alt: Network15.png
    :align: center
 
 配置如下：
+
 .. code:: ini
     [General]
     network = ManualConfigurationShowcase
@@ -166,11 +168,13 @@ Source files location:
 结果
 ------
 以下是接收和发送的数据包数量：
+
 .. image:: Pic/packetsreceivedsent3.png
    :alt: packetsreceivedsent3.png
    :align: center
 
 以下是接收和发送数据包的比例：
+
 .. image:: Pic/packetratio3.png
    :alt: packetratio3.png
    :align: center
