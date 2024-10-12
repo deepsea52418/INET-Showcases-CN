@@ -26,8 +26,8 @@ Source files location:
 配置如下：
 
 .. code:: ini
-    
-    [General]
+
+   # [General]
     network = ManualConfigurationShowcase
     sim-time-limit = 0.1s
     description = "Manual static stream redundancy configuration"
