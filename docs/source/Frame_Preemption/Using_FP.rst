@@ -21,14 +21,14 @@
 
 抢占是INET可组合以太网模型的一个功能。它使用INET的数据包流API，使得数据包传输表示为一个可中断的流。抢占需要`:ned:`LayeredEthernetInterface`，该接口包含一个MAC层和一个PHY层，如下所示：
 
-.. figure:: media/LayeredEthernetInterface2.png
+.. figure::pic/LayeredEthernetInterface2.png
    :align: center
 
 要启用抢占，需要将默认子模块`:ned:`EthernetMacLayer`和`:ned:`EthernetPhyLayer`替换为`:ned:`EthernetPreemptingMacLayer`和`:ned:`EthernetPreemptingPhyLayer`。
 
 `:ned:`EthernetPreemptingMacLayer`包含两个子模块，它们本身表示以太网MAC层，一个是可抢占的（`:ned:`EthernetFragmentingMacLayer`）和一个是快速MAC层（`:ned:`EthernetStreamingMacLayer`），每个层都有自己的帧队列：
 
-.. figure:: media/mac.png
+.. figure:: pic/mac.png
    :align: center
 
 `:ned:`EthernetPreemptingMacLayer`使用节点内的数据包流。离散的数据包从上层进入MAC模块，但以数据包流的形式离开子MAC层（快速和可抢占的）。数据包以流的形式从MAC层退出，并通过PHY层和链路表示为流。
@@ -46,7 +46,7 @@ PHY层会插入帧间间隔。
 
 模拟使用以下网络：
 
-.. figure:: media/network.png
+.. figure:: pic/network.png
    :align: center
 
 它包含两个连接在100Mbps以太网上的`:ned:`StandardHost`和一个`:ned:`PcapRecorder`用于记录PCAP跟踪；``host1``定期为``host2``生成数据包。
@@ -154,7 +154,7 @@ PHY层会插入帧间间隔。
 
 以下是帧抢占行为的视频：
 
-.. video:: media/preemption3.mp4
+.. video:: pic/preemption3.mp4
    :width: 100%
    :align: center
 
@@ -162,7 +162,7 @@ PHY层会插入帧间间隔。
 
 帧序列在Qtenv的数据包日志中显示：
 
-.. figure:: media/packetlog5.png
+.. figure:: pic/packetlog5.png
    :align: center
    :width: 100%
 
@@ -170,7 +170,7 @@ PHY层会插入帧间间隔。
 
 相同的帧序列显示在以下图像的序列图中，每个图像中选择并高亮显示不同的帧（红色）。请注意，时间轴是非线性的：
 
-.. figure:: media/seqchart4.png
+.. figure:: pic/seqchart4.png
    :align: center
    :width: 100%
 
@@ -180,7 +180,7 @@ PHY层会插入帧间间隔。
 
 以下是线性时间轴上的帧序列，``background-3-frag0``帧被高亮显示：
 
-.. figure:: media/linear.png
+.. figure:: pic/linear.png
    :align: center
    :width: 100%
 
@@ -188,7 +188,7 @@ PHY层会插入帧间间隔。
 
 以下是Wireshark中显示的相同帧序列：
 
-.. figure:: media/wireshark.png
+.. figure:: pic/wireshark.png
    :align: center
    :width: 100%
 
@@ -198,7 +198,7 @@ PHY层会插入帧间间隔。
 
 以下是``background-3-frag1``在Qtenv的数据包检查器中显示：
 
-.. figure:: media/packetinspector5.png
+.. figure:: pic/packetinspector5.png
    :align: center
    :width: 100%
 
@@ -208,10 +208,10 @@ PHY层会插入帧间间隔。
 
 高优先级和低优先级（快速和可抢占）数据包在`:ned:`EthernetPreemptingMacLayer`中走的路径如下红线所示：
 
-.. figure:: media/preemptible2.png
+.. figure:: pic/preemptible2.png
    :align: center
 
-.. figure:: media/express2.png
+.. figure:: pic/express2.png
    :align: center
 
 分析端到端延迟
@@ -222,7 +222,7 @@ PHY层会插入帧间间隔。
 
 为了分析相同数据包长度配置的结果，我们在以下图表中绘制了三种情况下UDP数据包在[0,t]上的平均端到端延迟。请注意，配置通过不同的线型区分，流量类别通过颜色区分：
 
-.. figure:: media/delay.png
+.. figure:: pic/delay.png
    :align: center
    :width: 80%
 
@@ -267,13 +267,13 @@ FramePreemption 配置
 
 现实流量情况下的平均端到端延迟在以下图表中绘制：
 
-.. figure:: media/realisticdelay.png
+.. figure:: pic/realisticdelay.png
    :align: center
    :width: 80%
 
 图表上方矩形指示的范围在下方的图表中进行了放大，以便更清晰地显示：
 
-.. figure:: media/realisticdelay_zoomed.png
+.. figure:: pic/realisticdelay_zoomed.png
    :align: center
    :width: 80%
 
