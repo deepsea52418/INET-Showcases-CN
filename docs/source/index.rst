@@ -45,7 +45,8 @@ INET Showcases CN
   +
 + **帧抢占**  
   
-  +
+  + `T-splendid <https://github.com/T-splendid>`_
+  + 1.0.0 完善本章内容
 + **直通交换**  
   
   + `Deepsea52418 <https://github.com/deepsea52418>`_ 
