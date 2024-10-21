@@ -34,9 +34,9 @@
    :align: center
 
 
-``EthernetPreemptingMacLayer`` 使用节点内的数据包流。离散的数据包从上层进入MAC模块，但以数据包流的形式离开子MAC层（快速和可抢占的）。数据包以流的形式从MAC层退出，并通过PHY层和链路表示为流。在抢占的情况下，数据包最初从可抢占的子MAC层流出。当高优先级帧在快速MAC层到达时， ``scheduler`` 会通知 ``preemptingServer`` 。 ``preemptingServer`` 停止可抢占的流，完整发送快速流，然后最终恢复可抢占的流。PHY层会插入帧间间隔。
+ ``EthernetPreemptingMacLayer`` 使用节点内的数据包流。离散的数据包从上层进入MAC模块，但以数据包流的形式离开子MAC层（快速和可抢占的）。数据包以流的形式从MAC层退出，并通过PHY层和链路表示为流。在抢占的情况下，数据包最初从可抢占的子MAC层流出。当高优先级帧在快速MAC层到达时， ``scheduler`` 会通知 ``preemptingServer`` 。 ``preemptingServer`` 停止可抢占的流，完整发送快速流，然后最终恢复可抢占的流。PHY层会插入帧间间隔。
 
-``EthernetPreemptingPhyLayer`` 同时支持数据包流和分片（将数据包分成多个片段发送）。
+ ``EthernetPreemptingPhyLayer`` 同时支持数据包流和分片（将数据包分成多个片段发送）。
 
 配置
 ~~~~~~
@@ -54,7 +54,7 @@
 -  ``PriorityQueueing``：在以太网MAC中使用优先级队列，以降低高优先级帧的延迟。
 -  ``FramePreemption``：使用抢占来确保高优先级帧具有非常低的延迟，并有一个保证的上限。
 
-此外，我们还演示了在更真实的流量下使用优先级队列和抢占：较长且更频繁的低优先级帧和较短且不太频繁的高优先级帧。这些模拟是上述三种配置的扩展，并在ini文件中定义为带有 ``Realistic``前缀的配置。
+此外，我们还演示了在更真实的流量下使用优先级队列和抢占：较长且更频繁的低优先级帧和较短且不太频繁的高优先级帧。这些模拟是上述三种配置的扩展，并在ini文件中定义为带有 ``Realistic`` 前缀的配置。
 
 我们还希望记录PCAP文件，以便在Wireshark中检查流量。我们启用PCAP记录，并将PCAP记录器设置为转储以太网PHY帧，因为抢占在PHY头中是可见的：
 
@@ -65,7 +65,7 @@
     **.crcMode = "computed"
     **.fcsMode = "computed"
 
-以下是 ``host1``中流量生成的配置：
+以下是 ``host1`` 中流量生成的配置：
 
 .. code:: ini
     *.host1.numApps = 2
@@ -80,7 +80,7 @@
     *.host1.app[1].io.destPort = 1001
 
 
-``host1``中有两个 ``UdpApp``，一个生成背景流量（低优先级），另一个生成高优先级流量。UDP应用在数据包上添加VLAN标签，以太网MAC使用标签中的VLAN ID将流量分类为高优先级和低优先级。
+ ``host1`` 中有两个 ``UdpApp`` ，一个生成背景流量（低优先级），另一个生成高优先级流量。UDP应用在数据包上添加VLAN标签，以太网MAC使用标签中的VLAN ID将流量分类为高优先级和低优先级。
 
 我们设置低优先级的背景流量带宽为96Mbps，高优先级的流量为9.6Mbps，两者的数据包大小均为1200B。它们的总和高于100 Mbps链路容量（我们希望队列不为空）；多余的数据包将被丢弃。
 
@@ -93,7 +93,7 @@
     *.host1.app[1].source.packetLength = 1200B
     *.host1.app[1].source.productionInterval = truncnormal(1ms,500us)
 
-``FifoQueueing``配置不使用抢占或优先级队列。该配置仅将 ``EthernetMac``的队列长度限制为4。
+ ``FifoQueueing`` 配置不使用抢占或优先级队列。该配置仅将 ``EthernetMac``的队列长度限制为4。
 
 在所有三种情况下，队列需要较短，以减少队列时间对测量延迟的影响。然而，如果队列过短，它们可能会过于频繁地为空，这将使优先级队列失效（例如，如果队列中只有一个数据包，它无法进行优先级排序）。队列长度为4是一个任意选择。队列类型设置为 `DropTailQueue`，以便在队列满时可以丢弃数据包。
 
@@ -104,7 +104,7 @@
     **.macLayer.queue.packetCapacity = 4
     **.macLayer.queue.typename = "DropTailQueue"
 
-在 ``PriorityQueueing``配置中，我们将MAC层中的队列类型从默认的 ``PacketQueue``更改为 ``PriorityQueue``：
+在 ``PriorityQueueing`` 配置中，我们将MAC层中的队列类型从默认的 ``PacketQueue`` 更改为 ``PriorityQueue`` ：
 
 .. code:: ini
     [Config PriorityQueueing]
@@ -119,7 +119,7 @@
 
 优先级队列利用两个内部队列来处理两类流量。为了限制队列时间对测量端到端延迟的影响，我们还将内部队列的长度限制为4。我们还禁用了共享缓冲区，并将队列类型设置为 ``DropTailQueue``。我们使用优先级队列的分类器将数据包放入两类流量中。
 
-在 ``FramePreemption``配置中，我们将 ``LayeredEthernetInterface``中的默认 ``EthernetMacLayer``和 ``EthernetPhyLayer``模块替换为支持抢占的 ``EthernetPreemptingMacLayer``和 ``EthernetPreemptingPhyLayer``。
+在 ``FramePreemption`` 配置中，我们将 ``LayeredEthernetInterface`` 中的默认 ``EthernetMacLayer`` 和 ``EthernetPhyLayer`` 模块替换为支持抢占的 ``EthernetPreemptingMacLayer`` 和 ``EthernetPreemptingPhyLayer``。
 
 .. code:: ini
     [Config FramePreemption]
@@ -135,7 +135,7 @@
 
 .. note:: 我们也可以在EthernetPreemptableMac模块中仅使用一个共享优先级队列，但这里不涉及。
 
-我们在 ``RealisticFifoQueueing``、 ``RealisticPriorityQueueing``和 ``RealisticFramePreemption``配置中使用以下流量：
+我们在 ``RealisticFifoQueueing`` 、 ``RealisticPriorityQueueing`` 和 ``RealisticFramePreemption`` 配置中使用以下流量：
 
 .. code:: ini
     #abstract-config = true (requires omnet 7)
