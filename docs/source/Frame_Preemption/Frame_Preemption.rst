@@ -29,11 +29,11 @@
 
 要启用帧抢占，需要将默认子模块 ``EthernetMacLayer``  和 ``EthernetPhyLayer`` 替换为 ``EthernetPreemptingMacLayer`` 和 ``EthernetPreemptingPhyLayer``。
 
- ``EthernetPreemptingMacLayer``包含两个子模块，它们本身表示以太网MAC层，一个是可抢占的（ ``EthernetFragmentingMacLayer``）和一个是快速MAC层（ ``EthernetStreamingMacLayer``），每个都有自己的帧队列：
-
+ ``EthernetPreemptingMacLayer`` 包含两个子模块，它们本身表示以太网MAC层，一个是可抢占的（ ``EthernetFragmentingMacLayer`` ）和一个是快速MAC层（ ``EthernetStreamingMacLayer`` ），每个都有自己的帧队列：
 
 .. figure:: Pic/mac.png
    :align: center
+
 
  ``EthernetPreemptingMacLayer``使用节点内的数据包流。离散的数据包从上层进入MAC模块，但以数据包流的形式离开子MAC层（快速和可抢占的）。数据包以流的形式从MAC层退出，并通过PHY层和链路表示为流。
 
