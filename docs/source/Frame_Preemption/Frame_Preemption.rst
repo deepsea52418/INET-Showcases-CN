@@ -24,19 +24,20 @@
 
 帧抢占是INET中可组合以太网模型的一个功能。它使用INET的数据包流API，使得数据包传输表示为一个可中断的流。帧抢占需要 ``LayeredEthernetInterface``，其包含一个MAC层和一个PHY层，如下所示：
 
-.. figure::Pic/LayeredEthernetInterface2.png
+.. figure:: Pic/LayeredEthernetInterface2.png
    :align: center
 
 要启用帧抢占，需要将默认子模块 ``EthernetMacLayer`` 和 ``EthernetPhyLayer`` 替换为 ``EthernetPreemptingMacLayer`` 和 ``EthernetPreemptingPhyLayer``。
 
  ``EthernetPreemptingMacLayer``包含两个子模块，它们本身表示以太网MAC层，一个是可抢占的（ ``EthernetFragmentingMacLayer``）和一个是快速MAC层（ ``EthernetStreamingMacLayer``），每个都有自己的帧队列：
 
+
 .. figure:: Pic/mac.png
    :align: center
 
  ``EthernetPreemptingMacLayer``使用节点内的数据包流。离散的数据包从上层进入MAC模块，但以数据包流的形式离开子MAC层（快速和可抢占的）。数据包以流的形式从MAC层退出，并通过PHY层和链路表示为流。
 
-在抢占的情况下，数据包最初从可抢占的子MAC层流出。当高优先级帧在快速MAC层到达时， ``scheduler``会通知 ``preemptingServer``。 ``preemptingServer``停止可抢占的流，完整发送快速流，然后最终恢复可抢占的流。
+在抢占的情况下，数据包最初从可抢占的子MAC层流出。当高优先级帧在快速MAC层到达时， ``scheduler`` 会通知 ``preemptingServer`` 。 ``preemptingServer``停止可抢占的流，完整发送快速流，然后最终恢复可抢占的流。
 
 PHY层会插入帧间间隔。
 
