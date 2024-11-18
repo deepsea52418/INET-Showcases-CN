@@ -24,6 +24,7 @@ Source files location:
 网络中有四个应用程序，在客户端和服务器之间创建两个独立的数据流。BE流带宽为~48 Mbps，Video流带宽为 ~24 Mbps。
 
 .. code:: ini
+
     # client applications
     *.client.numApps = 2
     *.client.app[*].typename = "UdpSourceApp"
@@ -47,6 +48,7 @@ Source files location:
 这两个流具有两种不同的流量类别：尽力而为流和视频流。桥接层通过UDP目标端口识别传出的数据包。客户端使用IEEE 802.1Q PCP字段对流进行编码，交换机则对流进行解码。
 
 .. code:: ini
+
     # enable outgoing streams
     *.client.hasOutgoingStreams = true
 
@@ -68,6 +70,7 @@ Source files location:
 异步流量整形器要求每个数据包的传输合格时间在入端口的每流过滤器处计算出来。
 
 .. code:: ini
+
     # enable ingress per-stream filtering
     *.switch.hasIngressTrafficFiltering = true
     # per-stream filtering
@@ -100,6 +103,7 @@ Source files location:
 结果
 -------
 第一个图表显示了客户端中应用层传出流量的数据速率。两种流量类别的数据速率随时间随机变化，但平均值相同。
+
 .. TODO：图片错误，需要更新一下图片
 
 .. image:: Pic/ClientApplicationTraffic2.png
@@ -107,6 +111,7 @@ Source files location:
    :align: center
 
 下图显示了流量整形器的入口处流量的速率。此数据速率是在交换机的出端口内测量的。此图与上一个图略有不同，因为流量已经在交换机中，并且是在不同的协议级别进行测量的。（增加了IP,MAC,PHY层信息，数据包更大一点）
+
 .. TODO：图片错误，需要更新一下图片
 
 .. image:: Pic/ClientApplicationTraffic2.png
