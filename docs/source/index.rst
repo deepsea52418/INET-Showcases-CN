@@ -42,7 +42,8 @@ INET Showcases CN
   + 1.0.0 完善本章内容
 + **帧复制与消除**  
   
-  +
+  + `Deepsea52418 <https://github.com/deepsea52418>`_ 
+  + 1.0.0 完善本章内容
 + **帧抢占**  
   
   + `T-splendid <https://github.com/T-splendid>`_

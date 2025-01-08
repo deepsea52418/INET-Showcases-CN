@@ -101,6 +101,7 @@ Source files location:
    :align: center
 
 通过python脚本验证了预期成功接收数据包数与发送数据包数之比，预期结果约为0.657。
+
 | 源代码：
 |  `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/52100d503a7a324ef4538280927ab223/omnetpp.ini>`__ 
 |  `AutomaticFailureProtectionShowcase.ned <https://inet.omnetpp.org/docs/_downloads/3dbef2dbf1e351fc2ac4dd2f0338bde0/AutomaticFailureProtectionShowcase.ned>`__
