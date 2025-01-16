@@ -26,11 +26,12 @@ INET Showcases CN
 + **时间同步** 
   
   + `dkmahao <https://github.com/dkmahao>`_ 
-  + 1.1.0 完善【时钟漂移】部分
-  + 1.0.0 完善【时钟漂移】部分
+  + 1.1 完善【时钟漂移】部分
+  + 1.0 完善【时钟漂移】部分
 + **流过滤与监管**  
   
-  +   
+  + `yaanng2022 <https://github.com/yaanng2022>`_ 
+  + 1.0 完善本章内容
 + **流量调度与整形**  
   
   
@@ -38,24 +39,24 @@ INET Showcases CN
 + **自动门控配置**  
   
   + `Caceny <https://github.com/Caceny>`_
-  + 1.0.1 内容润色
-  + 1.0.0 完善本章内容
+  + 1.1 内容润色
+  + 1.0 完善本章内容
 + **帧复制与消除**  
   
   + `Deepsea52418 <https://github.com/deepsea52418>`_ 
-  + 1.0.0 完善本章内容
+  + 1.0 完善本章内容
 + **帧抢占**  
   
   + `T-splendid <https://github.com/T-splendid>`_
-  + 1.0.0 完善本章内容
+  + 1.0 完善本章内容
 + **直通交换**  
   
   + `Deepsea52418 <https://github.com/deepsea52418>`_ 
-  + 1.0.0 完善本章内容
+  + 1.0 完善本章内容
 + **组合功能**  
   
   + `dkmahao <https://github.com/dkmahao>`_ 
-  + 1.0.0 完善【时间同步对TAS整形的影响】部分
+  + 1.0 完善【时间同步对TAS整形的影响】部分
 
 
 

@@ -10,6 +10,5 @@
     :maxdepth: 1
     :glob:
     
-    demo
     Clock_Drift
     Using_gPTP

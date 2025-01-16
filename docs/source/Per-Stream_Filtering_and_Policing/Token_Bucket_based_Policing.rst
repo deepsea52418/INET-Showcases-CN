@@ -2,6 +2,7 @@
 ===================
 
 | `原文链接 <https://inet.omnetpp.org/docs/showcases/tsn/streamfiltering/tokenbucket/doc/index.html>`__ 
+| `讲解视频 <https://space.bilibili.com/35942145>`__
 
 目标
 ~~~~~

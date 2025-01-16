@@ -1,13 +1,13 @@
-Peeking_Under_the_Hood
+内部工作原理
 ===================
 
 | `原文链接 <https://inet.omnetpp.org/docs/showcases/tsn/streamfiltering/tokenbucket/doc/index.html>`__ 
+| `讲解视频 <https://space.bilibili.com/35942145>`__
 
 目标
 ~~~~~
 
-该展示演示了过滤和监管模块可以在网络节点的上下文之外工作。 这样做可能有助于组装和验证特定的复杂过滤和监管行为，而这些行为很难在完整的网络中复制。
-
+本示例演示了流过滤与监管模块可以在网络节点之外运行。这样做可能有助于测试验证特定的复杂流过滤和监管行为。
 
 INET version: ``4.4``
 
@@ -18,7 +18,7 @@ INET version: ``4.4``
 模型
 ~~~~~~~~~
 
-在此配置中，我们直接将流过滤模块连接到多个数据包源。
+在此配置中，我们直接将流过滤模块连接到多个数据包发送源。
 
 下面是网络
 
@@ -29,6 +29,7 @@ INET version: ``4.4``
 下面是配置
 
 .. code:: ini
+
    [General]
    network = PeekingUnderTheHoodShowcase
    sim-time-limit = 1s
@@ -76,7 +77,7 @@ INET version: ``4.4``
 
 | 源代码：
 |  `omnetpp.ini <https://inet.omnetpp.org/docs/_downloads/65356755db975f6bb9efee6562c9d74a/omnetpp.ini>`__ 
-   `PeekingUnderTheHoodShowcase.ned <https://inet.omnetpp.org/docs/_downloads/95a5f7108069c83ee33d9fce6f6f74cd/PeekingUnderTheHoodShowcase.ned>`__
+|  `PeekingUnderTheHoodShowcase.ned <https://inet.omnetpp.org/docs/_downloads/95a5f7108069c83ee33d9fce6f6f74cd/PeekingUnderTheHoodShowcase.ned>`__
 
 讨论
 ----------
