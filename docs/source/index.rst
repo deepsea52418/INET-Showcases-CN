@@ -80,3 +80,4 @@ INET Showcases CN
    Frame_Preemption/Frame_Preemption
    Cut-Through_Switching/Cut-Through_Switching
    Combining_Features/index
+   Measurement/index
