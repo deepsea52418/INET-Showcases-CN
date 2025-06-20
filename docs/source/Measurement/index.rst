@@ -13,8 +13,10 @@
     Measuring ChannelThroughput
     Measuring Channel Utilization
     Measuring End-to-end Delay
-    Measuring Packet DelayVariation
+    Measuring Packet Delay Variation
     Measuring Transmission Time
     Measuring Propagation Time
-    Measuring Queueing TimeMeasuring Residence TimeMeasuring Data Rate
-    Measuring Time Along PacketFlows
+    Measuring Queueing Time
+    Measuring Residence Time
+    Measuring Data Rate
+    Measuring Time Along Packet Flows
